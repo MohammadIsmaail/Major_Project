@@ -17,7 +17,8 @@
     "express": "^5.2.1",
     "helmet": "^8.2.0",
     "pg": "^8.21.0",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "^1.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

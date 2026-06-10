@@ -2,12 +2,21 @@ import 'dotenv/config'
 import express from "express"
 import cors from "cors"
 import helmet from "helmet"
+import { AppDataSource } from './DBconfig/dbconfig.ts'
 const app = express()
 
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
 
+AppDataSource.initialize()
+.then(()=>{
+    console.log("DataBase is Connected is Successfully!");
+})
+.catch((err:any)=>{
+    console.log(err);
+    
+})
 const Port = process.env.PORT || 4000;
 
 app.listen(Port,()=>{
