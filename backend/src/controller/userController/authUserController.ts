@@ -1,7 +1,7 @@
 import { user } from "../../entities/user";
 import { createResponse } from "../../helper/createResponse";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import { generateToken } from "../../helper/jwt";
 
 export const userRegister = async (req: any, res: any) => {
  
@@ -35,12 +35,9 @@ export const userLogin = async (req: any, res: any) => {
         return createResponse(res, false, 404, "Please Enter Valid Password!", [], true);
       }
       else{
-        const token = jwt.sign({ email: isExist.email }, "jwt_token", { expiresIn: "24h" });
-        const result = {
-          token,
-          isExist
-        }
-        return createResponse(res, true, 200, "Login Successful", { result }, false);
+        const payload = {email:isExist.email,id:isExist.id}
+        const token = generateToken(payload)
+        return createResponse(res, true, 200, "Login Successful", { ...isExist,token }, false);
       }
     }
  }catch(err){
