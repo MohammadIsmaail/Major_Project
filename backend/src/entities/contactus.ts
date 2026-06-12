@@ -20,11 +20,12 @@ export class contactus extends BaseEntity{
     @Column({  name: "des",type: "varchar", length: 255, nullable: true})
     des: any
 
-    @Column({  name: "created_at",type: "timestamp", default:()=>{"CURRENT_TIMESTAMP"}})
+    @Column({  name: "created_at",type: "timestamp", default:()=>"CURRENT_TIMESTAMP"})
     created_at: any
 
-    @Column({  name: "updated_at",type: "timestamp", default:()=>{"CURRENT_TIMESTAMP"}})
+    @Column({  name: "updated_at",type: "timestamp", default:()=>"CURRENT_TIMESTAMP"})
     updated_at: any
+
 
 
 

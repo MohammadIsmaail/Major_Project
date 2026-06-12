@@ -23,9 +23,10 @@ export class admin extends BaseEntity{
     @Column({  name: "address",type: "varchar", length: 255, nullable: true})
     address: any
 
-    @Column({  name: "created_at",type: "timestamp", default:()=>{"CURRENT_TIMESTAMP"}})
+    @Column({  name: "created_at",type: "timestamp", default:()=>"CURRENT_TIMESTAMP"})
     created_at: any
 
-    @Column({  name: "updated_at",type: "timestamp", default:()=>{"CURRENT_TIMESTAMP"}})
+    @Column({  name: "updated_at",type: "timestamp", default:()=>"CURRENT_TIMESTAMP"})
     updated_at: any
+
 }

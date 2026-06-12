@@ -14,15 +14,16 @@ export class message extends BaseEntity{
     @Column({  name: "reciever_id",type: "int", nullable:true})
     reciever_id: any
 
-     @Column({  name: "message",type: "int", length:255, nullable:true})
+     @Column({  name: "message",type: "varchar", length:255, nullable:true})
     message: any
     
     @Column({  name: "status",type: "int", default:1})
     status: any
 
-    @Column({  name: "created_at",type: "timestamp", default:()=>{"CURRENT_TIMESTAMP"}})
+    @Column({  name: "created_at",type: "timestamp", default:()=>"CURRENT_TIMESTAMP"})
     created_at: any
 
-    @Column({  name: "updated_at",type: "timestamp", default:()=>{"CURRENT_TIMESTAMP"}})
+    @Column({  name: "updated_at",type: "timestamp", default:()=>"CURRENT_TIMESTAMP"})
     updated_at: any
+
 }
