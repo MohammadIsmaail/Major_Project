@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
         <a className="navbar-brand fw-bold fs-3" href="/">
-          MyLMS
+            LMS Portal
         </a>
 
         <button
@@ -42,23 +42,24 @@ const Navbar: React.FC = () => {
               </Link>
             </li>
 
-             <li className="nav-item">
+            <li className="nav-item">
               <Link className="nav-link active" to="/register">
                 Register
               </Link>
             </li>
 
-             <li className="nav-item">
+            <li className="nav-item">
               <Link className="nav-link active" to="/login">
                 Login
               </Link>
             </li>
 
-         {/* <Link className="navbar-brand fw-bold fs-3" to="/">
-  LMS Portal
-</Link> */}
+            <li className="nav-item">
+              <Link className="nav-link active" to="/adminLogin">
+                Admin
+              </Link>
+            </li>
           </ul>
-
           <button className="btn btn-primary ms-lg-4">
             Get Started
           </button>

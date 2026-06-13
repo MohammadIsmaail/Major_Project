@@ -8,7 +8,7 @@ import { toast, Bounce } from "react-toastify";
 import { userLoginService } from "../services/API";
 
 
-function Login() {
+function adminLogin() {
     const navigate = useNavigate()
     //  Validation Schema
     const schema = yup.object().shape({
@@ -57,7 +57,7 @@ function Login() {
                     transition: Bounce,
                 });
                 reset();
-                navigate("/userDashboard"); // optional
+                navigate("/adminDashboard"); // optional
             } else {
                 toast.error(`${res.message}`, {
                     position: "top-right",
@@ -106,7 +106,7 @@ function Login() {
                         <div className="register-card w-100">
 
                             <h2 className="fw-bold text-center mb-4">
-                                UserLogin Form
+                                Admin Login Form
                             </h2>
 
                             <form onSubmit={handleSubmit(onSubmit)}>
@@ -167,4 +167,4 @@ function Login() {
     )
 }
 
-export default Login
+export default adminLogin

@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import "../styles/RegisterUser.css"
 import Navbar from "./Navbar";
 import { userRegistrationService } from "../services/API";
+import { toast, Bounce } from "react-toastify";
 
 //  Validation Schema
 const schema = yup.object().shape({
@@ -39,7 +40,7 @@ const schema = yup.object().shape({
 });
 
 const Register = () => {
-
+const navigate = useNavigate()
     const {
         register,
         handleSubmit,
@@ -51,9 +52,39 @@ const Register = () => {
     });
 
     const onSubmit =async (data: any) => {
-       console.log(data)      
-       const res = await  userRegistrationService(data)
-      console.log(res);
+       try {
+    const res = await userRegistrationService(data);
+
+    if (res.success) {
+     toast.success(`${res.message}`, {
+  position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: false,
+  pauseOnHover: true,
+  draggable: true,
+  theme: "light",
+  transition: Bounce,
+});
+      reset();
+      navigate("/login"); // optional
+    } else {
+      toast.error(`${res.message}`, {
+  position: "top-right",
+  autoClose: 5000,
+  theme: "light",
+  transition: Bounce,
+});
+    }
+  } catch (error: any) {
+    toast.error(
+      error?.response?.data?.message ||
+      "Something went wrong!",
+      {
+        position: "bottom-right",
+      }
+    );
+  }
     }
 
 

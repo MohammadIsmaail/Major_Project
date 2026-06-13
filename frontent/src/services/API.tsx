@@ -6,3 +6,8 @@ export const userRegistrationService = async (_data:any) => {
     const res = await axios.post(`${BASE_URL}/user/register`,_data)
     return res?.data
 }
+
+export const userLoginService = async (_data:any) => {
+    const res = await axios.post(`${BASE_URL}/user/login`,_data)
+    return res?.data
+}
