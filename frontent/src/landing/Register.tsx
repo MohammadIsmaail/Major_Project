@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "../styles/RegisterUser.css"
 import Navbar from "./Navbar";
+import { userRegistrationService } from "../services/API";
 
 //  Validation Schema
 const schema = yup.object().shape({
@@ -38,7 +39,7 @@ const schema = yup.object().shape({
 });
 
 const Register = () => {
-    const navigate = useNavigate()
+
     const {
         register,
         handleSubmit,
@@ -49,14 +50,16 @@ const Register = () => {
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = (data: any) => {
-        console.log(data)
+    const onSubmit =async (data: any) => {
+       console.log(data)      
+       const res = await  userRegistrationService(data)
+      console.log(res);
     }
 
 
     return (
         <>
-        <Navbar/>
+            <Navbar />
 
             <div className="container-fluid register-page">
                 <div className="row min-vh-100">
@@ -72,9 +75,9 @@ const Register = () => {
                                 anywhere.
                             </p>
 
+                           
                             <img
-                                src="/lms-image.svg"
-                                alt="LMS"
+                                src="https://cdni.iconscout.com/illustration/premium/thumb/online-learning-4268365-3551762.png"
                                 className="img-fluid"
                             />
                         </div>
@@ -90,7 +93,7 @@ const Register = () => {
                             <form onSubmit={handleSubmit(onSubmit)}>
 
                                 <div className="mb-3">
-                                    <label>Name *</label>
+                                    <label>Name <span className="text-danger">*</span></label>
                                     <input
                                         type="text"
                                         {...register("name")}
@@ -105,7 +108,7 @@ const Register = () => {
                                 </div>
 
                                 <div className="mb-3">
-                                    <label>Email *</label>
+                                    <label>Email <span className="text-danger">*</span></label>
                                     <input
                                         type="email"
                                         {...register("email")}
@@ -120,7 +123,7 @@ const Register = () => {
                                 </div>
 
                                 <div className="mb-3">
-                                    <label>Mobile *</label>
+                                    <label>Mobile <span className="text-danger">*</span></label>
                                     <input
                                         type="text"
                                         {...register("mobile")}
@@ -135,7 +138,7 @@ const Register = () => {
                                 </div>
 
                                 <div className="mb-3">
-                                    <label>Password *</label>
+                                    <label>Password <span className="text-danger">*</span></label>
                                     <input
                                         type="password"
                                         {...register("password")}
@@ -152,7 +155,15 @@ const Register = () => {
                                 <button className="btn btn-primary w-100 py-2 fw-bold">
                                     Register Now
                                 </button>
-
+                                <p className="text-center mt-3 mb-0">
+                                    Already have an account?{" "}
+                                    <Link
+                                        className="login-link"
+                                        to="/login"
+                                    >
+                                        Login
+                                    </Link>
+                                </p>
                             </form>
 
                         </div>
@@ -166,3 +177,5 @@ const Register = () => {
 };
 
 export default Register;
+
+
