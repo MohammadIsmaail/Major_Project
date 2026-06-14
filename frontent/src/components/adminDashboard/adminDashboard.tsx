@@ -2,41 +2,54 @@ import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUserAlt } from "react-icons/fa";
-import { AiOutlineDashboard } from "react-icons/ai";
+import { MdWindow } from "react-icons/md";
+import { FaUsers } from "react-icons/fa";
+import { FaGraduationCap } from "react-icons/fa";
+import { MdLibraryBooks } from "react-icons/md";
+import { RiFileList3Line } from "react-icons/ri";
+import { PiBookOpenTextBold } from "react-icons/pi";
+import { FiLogOut } from "react-icons/fi";
 
-const adminDashboard = ({children}:any) => {
-     const data=[
+
+const adminDashboard = ({ children }: any) => {
+    const data = [
         {
-            url:"/DashBoardAdminShow",
-            icon: AiOutlineDashboard,
-            name:"Dashboard"
-        },
-         {
-            url:"/ManageUserAdmin",
-            icon:FaUserAlt,
-            name:"Manage Users"
+            url: "/DashBoardAdminShow",
+            icon: MdWindow,
+            name: "Dashboard"
         },
         {
-            url:"/CreateMasterPlanAdmin",
-            icon:FaUserAlt,
-            name:"Create Master Plan"
-        },{
-            url:"/MasterPlanAdmin",
-            icon:FaUserAlt,
-            name:"Master Plan"
+            url: "/ManageUserAdmin",
+            icon: FaUsers,
+            name: "Manage Users"
         },
         {
-            url:"/CreateMasterCourseAdmin",
-            icon:FaUserAlt,
-            name:"Create Master Course"
+            url: "/CreateMasterPlanAdmin",
+            icon: RiFileList3Line,
+            name: "Create Master Plan"
         },
         {
-            url:"/MasterCourseAdmin",
-            icon:FaUserAlt,
-            name:"Master Course"
+            url: "/MasterPlanAdmin",
+            icon: MdLibraryBooks,
+            name: "Master Plan"
+        },
+        {
+            url: "/CreateMasterCourseAdmin",
+            icon: PiBookOpenTextBold,
+            name: "Create Master Course"
+        },
+        {
+            url: "/MasterCourseAdmin",
+            icon: FaGraduationCap,
+            name: "Master Course"
         }
-       
+        ,
+        {
+            url: "/",
+            icon: FiLogOut,
+            name: "Logout"
+        }
+
     ]
     const [open, setOpen] = useState(true);
     const navigate = useNavigate()
@@ -67,28 +80,21 @@ const adminDashboard = ({children}:any) => {
                         </div>
                     </div>
                     {/* icons */}
-                    <div className="row">
-                     
-
-
-
-                                {/*  */}
-
-                                  {
-            data?.map((item,index)=>{
-                const Icon=item.icon
-                return(
-                    <>
-            <Link key={index} to={item.url} className="text-light   d-flex align-items-center gap-5"style={{textDecoration: "none"}}>
-            <div>
-              <Icon className="text-light fs-4 " />
-             <span className="text-decoration-none ms-2"> {open && <span>{item.name}</span>}</span>
-            </div>
-          </Link>
-                    </>
-                )
-            })
-          }
+                    <div className="row mt-4 ">
+                        {data?.map((item, index) => {
+                            const Icon = item.icon
+                            return (
+                                <>
+                                    <Link key={index} to={item.url} className="text-light mb-1  d-flex align-items-center gap-5" style={{ textDecoration: "none" }}>
+                                        <div>
+                                            <Icon className="text-light fs-3 " />
+                                            <span className="text-decoration-none ms-2"> {open && <span>{item.name}</span>}</span>
+                                        </div>
+                                    </Link>
+                                </>
+                            )
+                        })
+                        }
                     </div>
                 </div>
                 <div className={`${open ? "col-sm-10" : "col-sm-11"}`}>
@@ -100,7 +106,7 @@ const adminDashboard = ({children}:any) => {
                                 onClick={handleHamburger}
                             />
 
-                            <h5 className="m-0">User Dashboard</h5>
+                            <h5 className="m-0">Admin Dashboard</h5>
 
                             <RiLogoutCircleRLine
                                 className="fs-4"

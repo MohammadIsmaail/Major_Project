@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/RegisterUser.css"
 import Navbar from "./Navbar";
 import { toast, Bounce } from "react-toastify";
-import { userLoginService } from "../services/API";
+import { adminLoginService } from "../services/API";
 
 
 function adminLogin() {
@@ -43,7 +43,7 @@ function adminLogin() {
 
     const onSubmit = async (data: any) => {
         try {
-            const res = await userLoginService(data);
+            const res = await adminLoginService(data);
 
             if (res.success) {
                 toast.success(`${res.message}`, {
@@ -144,7 +144,7 @@ function adminLogin() {
                                 </div>
 
                                 <button className="btn btn-primary w-100 py-2 fw-bold">
-                                    Register Now
+                                    Login Now
                                 </button>
                                 <p className="text-center mt-3 mb-0">
                                     Already have an account?{" "}
