@@ -47,7 +47,7 @@ function Login() {
 
             if (res.success) {
                 toast.success(`${res.message}`, {
-                    position: "top-right",
+                    position: "bottom-right",
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: false,
@@ -60,7 +60,7 @@ function Login() {
                 navigate("/userDashboard"); // optional
             } else {
                 toast.error(`${res.message}`, {
-                    position: "top-right",
+                    position: "bottom-right",
                     autoClose: 5000,
                     theme: "light",
                     transition: Bounce,

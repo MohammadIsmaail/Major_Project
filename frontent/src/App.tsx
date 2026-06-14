@@ -3,7 +3,7 @@ import "./styles/style.css"
 import Home from "./landing/Home"
 import Register from "./landing/Register"
 import Login from "./landing/Login"
-import AdminLogin from "./landing/AdminLogin"
+import AdminLogin from "./landing/adminLogin"
 import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserDashboard from "./components/userDashboard/userDashboard"
@@ -26,7 +26,7 @@ function App() {
       </BrowserRouter>
 
       <ToastContainer
-        position="top-right"
+        position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

@@ -57,7 +57,7 @@ const navigate = useNavigate()
 
     if (res.success) {
      toast.success(`${res.message}`, {
-  position: "top-right",
+  position: "bottom-right",
   autoClose: 5000,
   hideProgressBar: false,
   closeOnClick: false,
@@ -70,7 +70,7 @@ const navigate = useNavigate()
       navigate("/login"); // optional
     } else {
       toast.error(`${res.message}`, {
-  position: "top-right",
+  position: "bottom-right",
   autoClose: 5000,
   theme: "light",
   transition: Bounce,
