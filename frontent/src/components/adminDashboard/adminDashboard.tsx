@@ -68,9 +68,7 @@ const adminDashboard = ({children}:any) => {
                     </div>
                     {/* icons */}
                     <div className="row">
-                     <p className="text-light fw-bold m-0 fs-4">
-                                    Dashboard
-                                </p>
+                     
 
 
 
