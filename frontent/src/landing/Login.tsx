@@ -57,7 +57,7 @@ function Login() {
                     transition: Bounce,
                 });
                 reset();
-                navigate("/userDashboard"); // optional
+                navigate("/layout"); // optional
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",

@@ -1,15 +1,29 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RiLogoutCircleRLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaUserAlt } from "react-icons/fa";
+import { AiOutlineDashboard } from "react-icons/ai";
 
-const NavbarUserDashboard: React.FC = ({children :any}) => {
+const NavbarUserDashboard = ({ children }: any) => {
+     const data=[
+        {
+            url:"/layout",
+            icon: AiOutlineDashboard,
+            name:"Dashboard"
+        },
+         {
+            url:"/user",
+            icon:FaUserAlt,
+            name:"User"
+        }
+    ]
     const [open, setOpen] = useState(true);
     const navigate = useNavigate()
     const handleHamburger = () => {
         setOpen(!open)
     }
-    const logout = ()=>{
+    const logout = () => {
         navigate("/")
     }
     return (
@@ -17,13 +31,46 @@ const NavbarUserDashboard: React.FC = ({children :any}) => {
             <div className="row vh-100" style={{ margin: "0px", padding: "0px", height: "20px" }}>
                 <div className={`${open ? "col-sm-2 bg-dark" : "col-sm-1 bg-dark"}`}>
                     <div className="row">
-                        <span className="mt-3 float-left"><img
-                            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                            alt="logo"
-                            width="40"
-                            height="40"
-                        />
-                        <p className="text-light  fw-bold m-0">Dashboard</p></span>
+                        <div className="d-flex align-items-center gap-2 mt-3">
+                            <img
+                                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                                alt="logo"
+                                width="40"
+                                height="40"
+                            />
+
+                            {open && (
+                                <p className="text-light fw-bold m-0 fs-4">
+                                    Dashboard
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                    {/* icons */}
+                    <div className="row">
+                     <p className="text-light fw-bold m-0 fs-4">
+                                    Dashboard
+                                </p>
+
+
+
+                                {/*  */}
+
+                                  {
+            data?.map((item,index)=>{
+                const Icon=item.icon
+                return(
+                    <>
+            <Link key={index} to={item.url} className="text-light   d-flex align-items-center gap-5"style={{textDecoration: "none"}}>
+            <div>
+              <Icon className="text-light fs-4 " />
+             <span className="text-decoration-none ms-2"> {open && <span>{item.name}</span>}</span>
+            </div>
+          </Link>
+                    </>
+                )
+            })
+          }
                     </div>
                 </div>
                 <div className={`${open ? "col-sm-10" : "col-sm-11"}`}>
@@ -43,9 +90,9 @@ const NavbarUserDashboard: React.FC = ({children :any}) => {
                                 style={{ cursor: "pointer" }}
                             />
                         </div>
-                           <hr />
+                        <hr />
                         <div className="div">
-                            {children }
+                            {children}
                         </div>
                     </div>
                 </div>

@@ -57,7 +57,7 @@ function adminLogin() {
                     transition: Bounce,
                 });
                 reset();
-                navigate("/adminDashboard"); // optional
+                navigate("/DashBoardAdminShow"); // optional
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",
