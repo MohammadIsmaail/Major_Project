@@ -5,13 +5,12 @@ import helmet from "helmet"
 import { AppDataSource } from './DBconfig/dbconfig'
 import userRouter from './router/user/userrouter'
 import adminRouter from './router/admin/adminrouter'
-import ratelimit from './middleware/RateLimit/rateLimit'
 const app = express()
 
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
-app.use(ratelimit)
+
 
 AppDataSource.initialize()
 .then(()=>{
