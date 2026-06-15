@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
 import "../styles/RegisterUser.css"
 import Navbar from "./Navbar";
 import { toast, Bounce } from "react-toastify";
 import { adminLoginService } from "../services/API";
+import { useNavigate } from "react-router-dom";
 
 
 function adminLogin() {
@@ -58,6 +58,7 @@ function adminLogin() {
                 });
                 reset();
                 navigate("/DashBoardAdminShow"); // optional
+               localStorage.setItem("token",res.result.token)
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",
@@ -146,15 +147,7 @@ function adminLogin() {
                                 <button className="btn btn-primary w-100 py-2 fw-bold">
                                     Login Now
                                 </button>
-                                <p className="text-center mt-3 mb-0">
-                                    Already have an account?{" "}
-                                    <Link
-                                        className="login-link"
-                                        to="/register"
-                                    >
-                                        Register
-                                    </Link>
-                                </p>
+                                
                             </form>
 
                         </div>

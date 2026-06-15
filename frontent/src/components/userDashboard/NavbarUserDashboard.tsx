@@ -4,6 +4,7 @@ import { RiLogoutCircleRLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
 import { AiOutlineDashboard } from "react-icons/ai";
+import "../../styles/UserAdminNavUnLine.css"
 
 const NavbarUserDashboard = ({ children }: any) => {
      const data=[
@@ -64,7 +65,7 @@ const NavbarUserDashboard = ({ children }: any) => {
             <Link key={index} to={item.url} className="text-light   d-flex align-items-center gap-5"style={{textDecoration: "none"}}>
             <div>
               <Icon className="text-light fs-4 " />
-             <span className="text-decoration-none ms-2"> {open && <span>{item.name}</span>}</span>
+             <span className="text-decoration-none ms-2"> {open && <span className="UnLine fw-bold">{item.name}</span>}</span>
             </div>
           </Link>
                     </>

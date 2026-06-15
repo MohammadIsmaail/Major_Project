@@ -1,9 +1,9 @@
 
 const CreateMasterCourseAdmin = () => {
   return (
-    <div>
-      CreateMasterCourseAdmin
-    </div>
+    <>
+    
+    </>
   )
 }
 

@@ -9,6 +9,7 @@ import { MdLibraryBooks } from "react-icons/md";
 import { RiFileList3Line } from "react-icons/ri";
 import { PiBookOpenTextBold } from "react-icons/pi";
 import { FiLogOut } from "react-icons/fi";
+import "../../styles/UserAdminNavUnLine.css"
 
 
 const adminDashboard = ({ children }: any) => {
@@ -88,7 +89,7 @@ const adminDashboard = ({ children }: any) => {
                                     <Link key={index} to={item.url} className="text-light mb-1  d-flex align-items-center gap-5" style={{ textDecoration: "none" }}>
                                         <div>
                                             <Icon className="text-light fs-3 " />
-                                            <span className="text-decoration-none ms-2"> {open && <span>{item.name}</span>}</span>
+                                            <span className="text-decoration-none ms-2"> {open && <span className="UnLine">{item.name}</span>}</span>
                                         </div>
                                     </Link>
                                 </>

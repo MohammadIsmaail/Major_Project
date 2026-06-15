@@ -8,8 +8,10 @@ import { toast, Bounce } from "react-toastify";
 import { userLoginService } from "../services/API";
 
 
+
 function Login() {
     const navigate = useNavigate()
+
     //  Validation Schema
     const schema = yup.object().shape({
         email: yup
@@ -58,6 +60,11 @@ function Login() {
                 });
                 reset();
                 navigate("/layout"); // optional
+                console.log(res.result.token)
+             const data=  localStorage.setItem("token",res.result.token );
+             console.log(data);
+             
+
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",

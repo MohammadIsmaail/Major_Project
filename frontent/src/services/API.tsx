@@ -16,3 +16,25 @@ export const adminLoginService = async (_data:any) => {
     const res = await axios.post(`${BASE_URL}/admin/login`,_data)
     return res?.data
 }
+
+
+export const getDashboardStats = async () => {
+  const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
+  return res?.data;
+};
+
+
+export const createMasterPlan = async (data: any) => {
+  const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
+  return res?.data;
+};
+
+export const getMasterPlanById = async (id: string) => {
+  const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
+  return res?.data;
+};
+
+export const updateMasterPlan = async (id: string, data: any) => {
+  const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
+  return res?.data;
+};
