@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 import { toast, Bounce } from "react-toastify";
 import { adminLoginService } from "../services/API";
 import { useNavigate } from "react-router-dom";
+import { storeData } from "../utils/localStorage";
 
 
 function adminLogin() {
@@ -58,7 +59,7 @@ function adminLogin() {
                 });
                 reset();
                 navigate("/DashBoardAdminShow"); // optional
-               localStorage.setItem("token",res.result.token)
+                storeData("token",res.result.token)
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",

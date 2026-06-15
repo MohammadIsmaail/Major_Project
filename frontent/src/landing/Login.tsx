@@ -6,11 +6,13 @@ import "../styles/RegisterUser.css"
 import Navbar from "./Navbar";
 import { toast, Bounce } from "react-toastify";
 import { userLoginService } from "../services/API";
+import { storeData } from "../utils/localStorage";
 
 
 
 function Login() {
     const navigate = useNavigate()
+
 
     //  Validation Schema
     const schema = yup.object().shape({
@@ -60,11 +62,7 @@ function Login() {
                 });
                 reset();
                 navigate("/layout"); // optional
-                console.log(res.result.token)
-             const data=  localStorage.setItem("token",res.result.token );
-             console.log(data);
-             
-
+                storeData("token",res.result.token)
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",
