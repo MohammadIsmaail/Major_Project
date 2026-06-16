@@ -11,8 +11,20 @@ export class masterplan extends BaseEntity{
     @Column({  name: "desc",type: "varchar", length: 255, unique:true})
     desc: any
 
-    @Column({  name: "credit",type: "int", default:3})
+    @Column({  name: "credit",type: "int", nullable:true})
     credit: any
+
+    @Column({  name: "price",type: "int", nullable:true})
+    price: any
+
+    @Column({  name: "offer",type: "int", nullable:true})
+    offer: any
+
+    @Column({  name: "duration",type: "int", nullable:true})
+    duration: any
+
+     @Column({  name: "is_res",type: "int", nullable:true})
+    is_res: any
 
     @Column({  name: "status",type: "int", default:1})
     status: any
@@ -22,9 +34,6 @@ export class masterplan extends BaseEntity{
 
     @Column({  name: "updated_at",type: "timestamp", default:()=>"CURRENT_TIMESTAMP"})
     updated_at: any
-
-
-
 
 
 }
