@@ -60,9 +60,10 @@ function Login() {
                     theme: "light",
                     transition: Bounce,
                 });
+                storeData("token",res.result.token)
                 reset();
                 navigate("/layout"); // optional
-                storeData("token",res.result.token)
+               
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",
@@ -173,3 +174,5 @@ function Login() {
 }
 
 export default Login
+
+

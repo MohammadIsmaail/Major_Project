@@ -25,6 +25,7 @@ const NavbarUserDashboard = ({ children }: any) => {
         setOpen(!open)
     }
     const logout = () => {
+        localStorage.removeItem("token");
         navigate("/")
     }
     return (

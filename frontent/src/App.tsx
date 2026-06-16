@@ -16,22 +16,23 @@ import CreateMasterPlanAdmin from "./components/adminDashboard/CreateMasterPlanA
 import MasterPlanAdmin from "./components/adminDashboard/MasterPlanAdmin"
 import CreateMasterCourseAdmin from "./components/adminDashboard/CreateMasterCourseAdmin"
 import MasterCourseAdmin from "./components/adminDashboard/MasterCourseAdmin"
+import {AuthGuardProtected,AuthGuardPublic} from "./hoc/AuthGuard/AuthGuard"
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
+        <Routes> 
+          <Route path="/" element={<AuthGuardPublic><Home /></AuthGuardPublic>} />
+          <Route path="/register" element={<AuthGuardPublic><Register /></AuthGuardPublic>} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
 
           {/* UserDashboard */}
-          <Route path="/NavbarUserDashboard" element={<NavbarUserDashboard />} />
-          <Route path="/layout" element={<NavbarUserDashboard><Layout /></NavbarUserDashboard>} />
-          <Route path="/user" element={<NavbarUserDashboard><User /></NavbarUserDashboard>} />
-         
+          <Route path="/NavbarUserDashboard" element={<AuthGuardProtected><NavbarUserDashboard /></AuthGuardProtected>} />
+          <Route path="/layout" element={<AuthGuardProtected><NavbarUserDashboard><Layout /></NavbarUserDashboard></AuthGuardProtected>} />
+          <Route path="/user" element={<AuthGuardProtected><NavbarUserDashboard><User /></NavbarUserDashboard></AuthGuardProtected>} />
+        
          
          
             {/* AdminDashboard */}
