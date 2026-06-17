@@ -36,14 +36,14 @@ function App() {
          
          
             {/* AdminDashboard */}
-          <Route path="/adminDashboard" element={<AdminDashboard />} />
-          <Route path="/DashBoardAdminShow" element={<AdminDashboard><DashBoardAdminShow /></AdminDashboard>} />
-          <Route path="/ManageUserAdmin" element={ <AdminDashboard><ManageUserAdmin /></AdminDashboard>} />
-          <Route path="/CreateMasterPlanAdmin" element={<AdminDashboard><CreateMasterPlanAdmin /></AdminDashboard>} />
-          <Route path="/MasterPlanAdmin" element={<AdminDashboard><MasterPlanAdmin /></AdminDashboard>} />
-          <Route path="/CreateMasterCourseAdmin" element={<AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard>} />
-          <Route path="/MasterCourseAdmin" element={<AdminDashboard><MasterCourseAdmin /></AdminDashboard>} />
-          <Route path="/DashBoardAdminShow" element={<AdminDashboard><DashBoardAdminShow /></AdminDashboard>} />
+          <Route path="/adminDashboard" element={<AuthGuardProtected><AdminDashboard /></AuthGuardProtected>} />
+          <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/ManageUserAdmin" element={<AuthGuardProtected> <AdminDashboard><ManageUserAdmin /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/CreateMasterPlanAdmin" element={<AuthGuardProtected><AdminDashboard><CreateMasterPlanAdmin /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/MasterPlanAdmin" element={<AuthGuardProtected><AdminDashboard><MasterPlanAdmin /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/CreateMasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/MasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><MasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
         </Routes>
       </BrowserRouter>
       

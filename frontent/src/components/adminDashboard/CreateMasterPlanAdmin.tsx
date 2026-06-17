@@ -1,13 +1,8 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  createMasterPlan,
-  getMasterPlanById,
-  updateMasterPlan,
-} from "../../services/API";
+import {createMasterPlan,} from "../../services/API";
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import "../../styles/CreateMasterPlanAdmin.css";
 
 const schema = yup.object().shape({
@@ -60,13 +55,11 @@ const schema = yup.object().shape({
 const CreateMasterPlanAdmin = () => {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
-  const [loading, setLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
-    setValue,
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
@@ -76,73 +69,22 @@ const CreateMasterPlanAdmin = () => {
     },
   });
 
-  useEffect(() => {
-    if (id) {
-      const fetchData = async () => {
-        setLoading(true);
 
-
-        try {
-          const res = await getMasterPlanById(id);
-
-          if (res.success) {
-            const plan = res.result;
-
-            setValue("name", plan.name);
-            setValue("desc", plan.desc);
-            setValue("credit", plan.credit);
-            setValue("price", plan.price);
-            setValue("offer", plan.offer);
-            setValue("duration", plan.duration);
-            setValue("is_rec", plan.is_rec);
-            setValue("status", plan.status);
-          }
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchData();
-    }
-
-
-  }, [id]);
 
   const onSubmit = async (data: any) => {
     try {
-      let res;
+      const res = await createMasterPlan(data);
+      console.log("!!!!!!!!!!!!!!!!!!", res)
 
-
-      if (id) {
-        res = await updateMasterPlan(id, data);
-      } else {
-        res = await createMasterPlan(data);
-      }
-
-      if (res.success) {
-        if (!id) {
-          reset();
-        }
-      }
     } catch (error) {
       console.log(error);
     }
 
   };
 
-  if (loading) {
-    return (<div className="loading-wrapper">
-      Loading... </div>
-    );
-  }
-
   return (
     <>
       <div className="container-fluid py-4"> <div className="row justify-content-center"> <div className="col-12">
-
-
         <div className="master-plan-card">
 
           <div className="header-section">

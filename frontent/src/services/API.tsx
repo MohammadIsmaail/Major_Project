@@ -25,16 +25,16 @@ export const getDashboardStats = async () => {
 
 
 export const createMasterPlan = async (_data:any) => {
-  const res = await axios.post(`${BASE_URL}/admin/create-master-plan`);
+  const res = await axios.post(`${BASE_URL}/admin/create-master-plan`,_data);
   return res?.data;
 };
 
-export const getMasterPlanById = async (_id: string) => {
+export const getMasterPlan = async (_id: string) => {
   const res = await axios.get(`${BASE_URL}/admin/get-master-plan`);
   return res?.data;
 };
 
-export const updateMasterPlan = async (id: string, data: any) => {
-  const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
-  return res?.data;
-};
+// export const updateMasterPlan = async (id: string, data: any) => {
+//   const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
+//   return res?.data;
+// };

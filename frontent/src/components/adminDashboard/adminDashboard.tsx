@@ -15,7 +15,7 @@ import "../../styles/UserAdminNavUnLine.css"
 const adminDashboard = ({ children }: any) => {
     const type = JSON.parse(localStorage.getItem("user-type") as string)
     console.log(type);
-    
+
     const data = [
         {
             url: "/DashBoardAdminShow",
@@ -85,20 +85,25 @@ const adminDashboard = ({ children }: any) => {
                     </div>
                     {/* icons */}
                     <div className="row mt-4 ">
-                        {data?.map((item, index) => {
-                            const Icon = item.icon
+                        {data?.map((item) => {
+                            const Icon = item.icon;
+
                             return (
-                                <>
-                                    <Link key={index} to={item.url} className="text-light mb-1  d-flex align-items-center gap-5" style={{ textDecoration: "none" }}>
-                                        <div>
-                                            <Icon className="text-light fs-3 " />
-                                            <span className="text-decoration-none ms-2"> {open && <span className="UnLine">{item.name}</span>}</span>
-                                        </div>
-                                    </Link>
-                                </>
-                            )
-                        })
-                        }
+                                <Link
+                                    key={item.url}
+                                    to={item.url}
+                                    className="text-light mb-1 d-flex align-items-center gap-5"
+                                    style={{ textDecoration: "none" }}
+                                >
+                                    <div>
+                                        <Icon className="text-light fs-3" />
+                                        <span className="ms-2">
+                                            {open && <span className="UnLine">{item.name}</span>}
+                                        </span>
+                                    </div>
+                                </Link>
+                            );
+                        })}
                     </div>
                 </div>
                 <div className={`${open ? "col-sm-10" : "col-sm-11"}`}>
