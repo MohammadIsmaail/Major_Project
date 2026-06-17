@@ -17,7 +17,7 @@ export const adminLoginService = async (_data:any) => {
     return res?.data
 }
 
-
+// dfghjk
 export const getDashboardStats = async () => {
   const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
   return res?.data;
@@ -29,7 +29,7 @@ export const createMasterPlan = async (_data:any) => {
   return res?.data;
 };
 
-export const getMasterPlan = async (_id: string) => {
+export const getMasterPlan = async () => {
   const res = await axios.get(`${BASE_URL}/admin/get-master-plan`);
   return res?.data;
 };
