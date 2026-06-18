@@ -17,6 +17,7 @@ import MasterPlanAdmin from "./components/adminDashboard/MasterPlanAdmin"
 import CreateMasterCourseAdmin from "./components/adminDashboard/CreateMasterCourseAdmin"
 import MasterCourseAdmin from "./components/adminDashboard/MasterCourseAdmin"
 import {AuthGuardProtected,AuthGuardPublic} from "./hoc/AuthGuard/AuthGuard"
+import UpdateForm from "./components/adminDashboard/UpdateForm"
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/CreateMasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/MasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><MasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/UpdateForm/:id" element={<AuthGuardProtected><UpdateForm /></AuthGuardProtected>} />
         </Routes>
       </BrowserRouter>
       

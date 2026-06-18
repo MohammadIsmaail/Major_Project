@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {createMasterPlan,} from "../../services/API";
+import {createMasterPlan,getSingleMasterPlan} from "../../services/API";
 import { useSearchParams } from "react-router-dom";
 import "../../styles/CreateMasterPlanAdmin.css";
+import { useEffect } from "react";
 
 const schema = yup.object().shape({
   name: yup
@@ -53,8 +54,10 @@ const schema = yup.object().shape({
 });
 
 const CreateMasterPlanAdmin = () => {
+
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
+console.log("ID:", id);
 
   const {
     register,
@@ -70,6 +73,32 @@ const CreateMasterPlanAdmin = () => {
   });
 
 
+  useEffect(() => {
+  if (id) {
+    getPlanData();
+  }
+}, [id]);
+
+
+const getPlanData = async () => {
+  try {
+    const res:any = await getSingleMasterPlan(id);
+
+    reset({
+      name: res.result.name,
+      desc: res.result.desc,
+      credit: res.result.credit,
+      price: res.result.price,
+      offer: res.result.offer,
+      duration: res.result.duration,
+      is_rec: res.result.is_res,
+      status: res.result.status,
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   const onSubmit = async (data: any) => {
     try {

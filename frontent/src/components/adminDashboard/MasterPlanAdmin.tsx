@@ -2,9 +2,15 @@
 import { useEffect, useState } from "react";
 import { deleteMasterPlan, getMasterPlan } from "../../services/API";
 import "../../styles/masterplanshow.css";
+import { useNavigate } from "react-router-dom";
 
 const MasterPlanAdmin = () => {
   const [planData,setPlanData] = useState([])
+  const navigate = useNavigate();
+
+  const EditeDataofMasterPlan = (id:any)=>{
+      navigate(`/CreateMasterPlanAdmin?id=${id}`)
+  }
 
   useEffect(()=>{
     fetchData()
@@ -93,7 +99,7 @@ const MasterPlanAdmin = () => {
               </div>
 
               <div className="plan-card-footer">
-                <button className="btn btn-sm btn-outline-primary">
+                <button className="btn btn-sm btn-outline-primary" onClick={()=>{EditeDataofMasterPlan(plan.id)}}>
                   Edit
                 </button>
 
