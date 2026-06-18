@@ -74,7 +74,7 @@ const CreateMasterPlanAdmin = () => {
   const onSubmit = async (data: any) => {
     try {
       const res = await createMasterPlan(data);
-      console.log("!!!!!!!!!!!!!!!!!!", res)
+      console.log(res)
 
     } catch (error) {
       console.log(error);
@@ -207,7 +207,7 @@ const CreateMasterPlanAdmin = () => {
                 </label>
 
                 <select
-                  {...register("is_rec")}
+                  {...register("is_res")}
                   className="form-control-premium"
                 >
                   <option value={1}>Yes</option>

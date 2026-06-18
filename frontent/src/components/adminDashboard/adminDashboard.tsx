@@ -13,8 +13,7 @@ import "../../styles/UserAdminNavUnLine.css"
 
 
 const adminDashboard = ({ children }: any) => {
-    const type = JSON.parse(localStorage.getItem("user-type") as string)
-    console.log(type);
+
 
     const data = [
         {

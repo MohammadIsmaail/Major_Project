@@ -1,111 +1,10 @@
 
 import { useEffect, useState } from "react";
-import { getMasterPlan } from "../../services/API";
+import { deleteMasterPlan, getMasterPlan } from "../../services/API";
 import "../../styles/masterplanshow.css";
 
 const MasterPlanAdmin = () => {
   const [planData,setPlanData] = useState([])
-  const plans = [
-    {
-      id: 1,
-      name: "Basic Plan",
-      credit: 50,
-      price: 999,
-      offer: 10,
-      duration: 30,
-      status: "Active",
-      desc: "Basic LMS subscription plan",
-      is_rec: 0,
-    },
-    {
-      id: 2,
-      name: "Premium Plan",
-      credit: 200,
-      price: 2999,
-      offer: 20,
-      duration: 90,
-      status: "Active",
-      desc: "Premium LMS subscription plan",
-      is_rec: 1,
-    },
-    {
-      id: 3,
-      name: "Pro Plan",
-      credit: 500,
-      price: 4999,
-      offer: 30,
-      duration: 180,
-      status: "Active",
-      desc: "Professional LMS subscription plan",
-      is_rec: 0,
-    },
-    {
-      id: 4,
-      name: "Enterprise Plan",
-      credit: 1000,
-      price: 9999,
-      offer: 40,
-      duration: 365,
-      status: "Active",
-      desc: "Enterprise LMS subscription plan",
-      is_rec: 0,
-    },
-     {
-      id: 4,
-      name: "Enterprise Plan",
-      credit: 1000,
-      price: 9999,
-      offer: 40,
-      duration: 365,
-      status: "Active",
-      desc: "Enterprise LMS subscription plan",
-      is_rec: 0,
-    },
-     {
-      id: 4,
-      name: "Enterprise Plan",
-      credit: 1000,
-      price: 9999,
-      offer: 40,
-      duration: 365,
-      status: "Active",
-      desc: "Enterprise LMS subscription plan",
-      is_rec: 0,
-    },
-     {
-      id: 4,
-      name: "Enterprise Plan",
-      credit: 1000,
-      price: 9999,
-      offer: 40,
-      duration: 365,
-      status: "Active",
-      desc: "Enterprise LMS subscription plan",
-      is_rec: 0,
-    },
-     {
-      id: 4,
-      name: "Enterprise Plan",
-      credit: 1000,
-      price: 9999,
-      offer: 40,
-      duration: 365,
-      status: "Active",
-      desc: "Enterprise LMS subscription plan",
-      is_rec: 0,
-    },
-     {
-      id: 4,
-      name: "Enterprise Plan",
-      credit: 1000,
-      price: 9999,
-      offer: 40,
-      duration: 365,
-      status: "Active",
-      desc: "Enterprise LMS subscription plan",
-      is_rec: 0,
-    },
-  ];
 
   useEffect(()=>{
     fetchData()
@@ -115,13 +14,20 @@ const MasterPlanAdmin = () => {
       try {
         const res = await getMasterPlan();
         setPlanData(res.result)
-        console.log("!!!!!!!!!!!!!!!!!!", res)
+
   
       } catch (error) {
         console.log(error);
       }
   
     };
+
+    const deleteHandle =async (id:any)=>{
+
+       const deleta:any= await deleteMasterPlan(id)
+       console.log(deleta);
+       fetchData()
+    }
 
   return (
     <div className="container-fluid py-4">
@@ -141,7 +47,7 @@ const MasterPlanAdmin = () => {
                 plan.is_rec ? "recommended" : ""
               }`}
             >
-              {plan.is_rec === 1 && (
+              {plan.is_res === 1 && (
                 <span className="recommended-badge">
                   ⭐ Recommended
                 </span>
@@ -191,7 +97,7 @@ const MasterPlanAdmin = () => {
                   Edit
                 </button>
 
-                <button className="btn btn-sm btn-outline-danger">
+                <button className="btn btn-sm btn-outline-danger" onClick={()=>{deleteHandle(plan.id)}}>
                   Delete
                 </button>
               </div>
