@@ -24,7 +24,7 @@ export class masterplan extends BaseEntity{
     duration: any
 
      @Column({  name: "is_res",type: "int", nullable:true})
-    is_res: any
+    is_res: any 
 
     @Column({  name: "status",type: "int", default:1})
     status: any

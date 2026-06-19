@@ -35,16 +35,21 @@ export const getMasterPlan = async () => {
 };
 
 export const deleteMasterPlan = async (id: any) => {
-  return axios.delete(`${BASE_URL}/admin/delete-master-plan/${id}`);
+  const res = await axios.delete(`${BASE_URL}/admin/delete-master-plan/${id}`);
+  return res?.data;
 };
-
 
 export const getSingleMasterPlan = async (id: any) => {
-  return axios.get(`${BASE_URL}/admin/get-single-master-plan/${id}`);
+  const res = await axios.get(`${BASE_URL}/admin/get-single-master-plan/${id}`);
+  return res?.data;
 };
 
 
-// export const updateMasterPlan = async (id: string, data: any) => {
-//   const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
-//   return res?.data;
-// };
+export const updateMasterPlan = async (id: any,data: any) => {
+  const res = await axios.put(`${BASE_URL}/admin/update-master-plan/${id}`,data);
+  return res.data;
+};
+
+
+
+

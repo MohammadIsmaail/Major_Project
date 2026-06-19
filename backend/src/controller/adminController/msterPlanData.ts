@@ -19,7 +19,6 @@ export const masterPlanInsertData =async (req: any, res: any) => {
 
 };
 
-
 export const masterPlanGetData =async (req: any, res: any) => {
   try{
     const result = await masterplan.find()
@@ -29,7 +28,6 @@ export const masterPlanGetData =async (req: any, res: any) => {
   }
 
 };
-
 
 export const masterPlanDeleteData =async (req: any, res: any) => {
   try{
@@ -49,74 +47,26 @@ export const masterPlanDeleteData =async (req: any, res: any) => {
 
 };
 
-
 export const getSingleMasterPlan =async (req: any, res: any) => {
   try{
     const {id} = req.params;
     const result = await masterplan.findOne({where:{id:id}})
-       return createResponse(
-      res,
-      true,
-      200,
-      "Plan Found!",
-      result,
-      false
-    );  
+       return createResponse(res,true,200,"Plan Found!",result,false);  
   }catch(err){
-    return createResponse(res,false,500,"Internal Server Error!",[],true)
+    return createResponse(res,false,500,err,[],true)
   }
-
 };
 
-
-export const updateMasterPlanData = async (
-  req: any,
-  res: any
-) => {
+export const updateMasterPlanData = async ( req: any,res: any) => {
   try {
     const { id } = req.params;
 
-    const {
-      name,
-      desc,
-      credit,
-      price,
-      offer,
-      duration,
-      is_res,
-      status,
-    } = req.body;
+    const {name,desc,credit,price,offer,duration,is_res,status,} = req.body;
 
-    const result = await masterplan.update(
-      { id: Number(id) },
-      {
-        name,
-        desc,
-        credit,
-        price,
-        offer,
-        duration,
-        is_res,
-        status,
-      }
-    );
-
-    return createResponse(
-      res,
-      true,
-      200,
-      "Plan Updated Successfully!",
-      result,
-      false
-    );
+    const result = await masterplan.update({ id: Number(id) },
+                         {name,desc,credit,price,offer,duration,is_res,status,});
+    return createResponse(res,true,200,"Plan Updated Successfully!", result,false );
   } catch (err) {
-    return createResponse(
-      res,
-      false,
-      500,
-      "Internal Server Error!",
-      [],
-      true
-    );
+    return createResponse(res,false,500,err,[],true);
   }
 };
