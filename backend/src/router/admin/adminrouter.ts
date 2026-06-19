@@ -31,10 +31,13 @@ adminRouter.get("/get-single-master-plan/:id", getSingleMasterPlan);
 adminRouter.put("/update-master-plan/:id", updateMasterPlanData);
 
 //  Master Course  masterCourseGetData
-adminRouter.post("/create-master-course",thumbnail_course_contents.fields
-  ([{ name: "thumbnail",maxCount: 1,},
-    { name: "content",maxCount: 1, },]),
-  masterCourseInsertData,
+adminRouter.post(
+  "/create-master-course",
+  thumbnail_course_contents.fields([
+    { name: "thumbnail", maxCount: 1 },
+    { name: "content", maxCount: 1 },
+  ]),
+  masterCourseInsertData
 );
 
 
