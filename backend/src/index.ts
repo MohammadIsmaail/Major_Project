@@ -10,7 +10,8 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(helmet())
-app.use("/upload",express.static("upload"))
+app.use("/thumbnail_images",express.static("thumbnail_images"))
+app.use("/course_content_files",express.static("course_content_files"))
 
 
 AppDataSource.initialize()
