@@ -58,7 +58,7 @@ export const masterCourseInsertData = async (req: any, res: any) => {
 
 export const masterCourseGetData = async (req: any, res: any) => {
   try {
-    const result = await mastercourse.find();
+    const result = await mastercourse.find({order:{created_at:"DESC"}});
     return createResponse(
       res,
       true,
