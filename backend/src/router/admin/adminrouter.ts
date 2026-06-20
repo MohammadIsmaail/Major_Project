@@ -15,7 +15,14 @@ import {
   updateMasterPlanData,
 } from "../../controller/adminController/msterPlanData";
 
-import { masterCourseGetData, masterCourseInsertData } from "../../controller/adminController/masterCourseData";
+
+import {
+  masterCourseGetData,
+  masterCourseInsertData,
+  masterCourseDeleteData,
+  masterCourseSingleData,
+  masterCourseUpdateData,
+} from "../../controller/adminController/masterCourseData";
 import { thumbnail_course_contents } from "../../helper/ImageFileUpload";
 const adminRouter = express.Router();
 
@@ -31,15 +38,25 @@ adminRouter.get("/get-single-master-plan/:id", getSingleMasterPlan);
 adminRouter.put("/update-master-plan/:id", updateMasterPlanData);
 
 //  Master Course  masterCourseGetData
-adminRouter.post( "/create-master-course",thumbnail_course_contents.fields([
+adminRouter.post(
+  "/create-master-course",
+  thumbnail_course_contents.fields([
     { name: "thumbnail", maxCount: 1 },
-    { name: "content", maxCount: 1 },]),masterCourseInsertData
-  );
-
+    { name: "content", maxCount: 1 },
+  ]),
+  masterCourseInsertData,
+);
 
 adminRouter.get("/get-master-course", masterCourseGetData);
-
-
-
+adminRouter.delete("/delete-master-course/:id", masterCourseDeleteData);
+adminRouter.get("/single-master-course/:id", masterCourseSingleData);
+adminRouter.put(
+  "/update-master-course/:id",
+  thumbnail_course_contents.fields([
+    { name: "thumbnail", maxCount: 1 },
+    { name: "content", maxCount: 1 },
+  ]),
+  masterCourseUpdateData,
+);
 
 export default adminRouter;

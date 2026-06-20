@@ -1,0 +1,21 @@
+export const masterCourseUpdateData = async (req: any, res: any) => {
+  try {
+    const {id} = req.params;
+     const { title, desc, level, rating, duration, type, status } = req.body;
+
+    const isExist = await mastercourse.findOne({
+      where: { id: Number(id) },
+    });
+
+    if (!isExist) {
+      return createResponse(res,false,404,"Course Not Found!",[],true);
+    }
+
+    const result = await mastercourse.update( {id:Number(id)},
+                        {title, desc, level, rating, duration, type, status})
+    return createResponse(res,true,200,"Plan Updated Successfully!", result,false );
+  } catch (err: any) {
+    console.log(err);
+    return createResponse(res, false, 500,err.message || "Internal Server Error!", [], true);
+  }
+};
