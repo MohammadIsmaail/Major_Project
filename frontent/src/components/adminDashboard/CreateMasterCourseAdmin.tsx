@@ -4,6 +4,8 @@ import * as yup from "yup";
 import "../../styles/CreateMasterCourseAdmin.css";
 import { FaSave } from "react-icons/fa";
 import { MdRefresh } from "react-icons/md";
+import { createMasterCourse } from "../../services/API";
+import { toast, Bounce } from "react-toastify";
 
 const schema = yup.object().shape({
   thumbnail: yup
@@ -62,23 +64,26 @@ const CreateMasterCourseAdmin = () => {
       formData.append("duration", data.duration);
       formData.append("type", data.type);
       formData.append("status", String(data.status));
-
-      formData.append(
-        "thumbnail",
-        data.thumbnail[0]
-      );
-
-      formData.append(
-        "content",
-        data.content[0]
-      );
+      formData.append("thumbnail", data.thumbnail[0]);
+      formData.append("content", data.content[0]);
 
       console.log(formData);
 
-      // await createMasterCourse(formData);
+      const res = await createMasterCourse(formData);
+      if (res.success) {
+        toast.success(res.message, {
+          position: "bottom-right",
+          transition: Bounce,
+        });
+        alert("Course Created Successfully");
+        reset();
+      }else{
+         toast.error(res.message, {
+        position: "bottom-right",
+        transition: Bounce,
+      });
+      }
 
-      alert("Course Created Successfully");
-      reset();
     } catch (error) {
       console.log(error);
     }
@@ -107,191 +112,191 @@ const CreateMasterCourseAdmin = () => {
               </span>
             </div>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-  <div className="row g-2">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="row g-2">
 
-    {/* Course Title */}
-    <div className="col-md-8">
-      <label className="form-label-premium">
-        Course Title
-      </label>
+                {/* Course Title */}
+                <div className="col-md-8">
+                  <label className="form-label-premium">
+                    Course Title
+                  </label>
 
-      <input
-        type="text"
-        {...register("title")}
-        className="form-control-premium"
-        placeholder="Course Title"
-      />
+                  <input
+                    type="text"
+                    {...register("title")}
+                    className="form-control-premium"
+                    placeholder="Course Title"
+                  />
 
-      {errors.title && (
-        <small className="text-danger">
-          {String(errors.title.message)}
-        </small>
-      )}
-    </div>
+                  {errors.title && (
+                    <small className="text-danger">
+                      {String(errors.title.message)}
+                    </small>
+                  )}
+                </div>
 
-    {/* Status */}
-    <div className="col-md-4">
-      <label className="form-label-premium">
-        Status
-      </label>
+                {/* Status */}
+                <div className="col-md-4">
+                  <label className="form-label-premium">
+                    Status
+                  </label>
 
-      <select
-        {...register("status")}
-        className="form-control-premium"
-      >
-        <option value={1}>Active</option>
-        <option value={0}>Inactive</option>
-      </select>
-    </div>
+                  <select
+                    {...register("status")}
+                    className="form-control-premium"
+                  >
+                    <option value={1}>Active</option>
+                    <option value={0}>Inactive</option>
+                  </select>
+                </div>
 
-    {/* Level */}
-    <div className="col-md-3">
-      <label className="form-label-premium">
-        Level
-      </label>
+                {/* Level */}
+                <div className="col-md-3">
+                  <label className="form-label-premium">
+                    Level
+                  </label>
 
-      <select
-        {...register("level")}
-        className="form-control-premium"
-      >
-        <option value="">Select Level</option>
-        <option value="Beginner">Beginner</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Advanced">Advanced</option>
-      </select>
-    </div>
+                  <select
+                    {...register("level")}
+                    className="form-control-premium"
+                  >
+                    <option value="">Select Level</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
 
-    {/* Rating */}
-    <div className="col-md-3">
-      <label className="form-label-premium">
-        Rating
-      </label>
+                {/* Rating */}
+                <div className="col-md-3">
+                  <label className="form-label-premium">
+                    Rating
+                  </label>
 
-      <input
-        type="text"
-        {...register("rating")}
-        className="form-control-premium"
-        placeholder="4.8"
-      />
-    </div>
+                  <input
+                    type="text"
+                    {...register("rating")}
+                    className="form-control-premium"
+                    placeholder="4.8"
+                  />
+                </div>
 
-    {/* Duration */}
-    <div className="col-md-3">
-      <label className="form-label-premium">
-        Duration
-      </label>
+                {/* Duration */}
+                <div className="col-md-3">
+                  <label className="form-label-premium">
+                    Duration
+                  </label>
 
-      <input
-        type="text"
-        {...register("duration")}
-        className="form-control-premium"
-        placeholder="20 Hours"
-      />
-    </div>
+                  <input
+                    type="text"
+                    {...register("duration")}
+                    className="form-control-premium"
+                    placeholder="20 Hours"
+                  />
+                </div>
 
-    {/* Type */}
-    <div className="col-md-3">
-      <label className="form-label-premium">
-        Course Type
-      </label>
+                {/* Type */}
+                <div className="col-md-3">
+                  <label className="form-label-premium">
+                    Course Type
+                  </label>
 
-      <select
-        {...register("type")}
-        className="form-control-premium"
-      >
-        <option value="">Select Type</option>
-        <option value="Free">Free</option>
-        <option value="Premium">Premium</option>
-      </select>
-    </div>
+                  <select
+                    {...register("type")}
+                    className="form-control-premium"
+                  >
+                    <option value="">Select Type</option>
+                    <option value="Free">Free</option>
+                    <option value="Premium">Premium</option>
+                  </select>
+                </div>
 
-    {/* Thumbnail */}
-    <div className="col-md-6">
-      <label className="form-label-premium">
-        Thumbnail Image
-      </label>
+                {/* Thumbnail */}
+                <div className="col-md-6">
+                  <label className="form-label-premium">
+                    Thumbnail Image
+                  </label>
 
-      <input
-        type="file"
-        accept="image/*"
-        {...register("thumbnail")}
-        className="form-control-premium"
-      />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    {...register("thumbnail")}
+                    className="form-control-premium"
+                  />
 
-      {errors.thumbnail && (
-        <small className="text-danger">
-          {String(errors.thumbnail.message)}
-        </small>
-      )}
-    </div>
+                  {errors.thumbnail && (
+                    <small className="text-danger">
+                      {String(errors.thumbnail.message)}
+                    </small>
+                  )}
+                </div>
 
-    {/* Course Material */}
-    <div className="col-md-6">
-      <label className="form-label-premium">
-        Course Material
-      </label>
+                {/* Course Material */}
+                <div className="col-md-6">
+                  <label className="form-label-premium">
+                    Course Material
+                  </label>
 
-      <input
-        type="file"
-        accept=".pdf,.doc,.docx,.ppt,.pptx"
-        {...register("content")}
-        className="form-control-premium"
-      />
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,.ppt,.pptx"
+                    {...register("content")}
+                    className="form-control-premium"
+                  />
 
-      {errors.content && (
-        <small className="text-danger">
-          {String(errors.content.message)}
-        </small>
-      )}
-    </div>
+                  {errors.content && (
+                    <small className="text-danger">
+                      {String(errors.content.message)}
+                    </small>
+                  )}
+                </div>
 
-    {/* Description */}
-    <div className="col-12">
-      <label className="form-label-premium">
-        Description
-      </label>
+                {/* Description */}
+                <div className="col-12">
+                  <label className="form-label-premium">
+                    Description
+                  </label>
 
-      <textarea
-        rows={2}
-        {...register("desc")}
-        className="form-control-premium"
-        placeholder="Course Description"
-      />
+                  <textarea
+                    rows={2}
+                    {...register("desc")}
+                    className="form-control-premium"
+                    placeholder="Course Description"
+                  />
 
-      {errors.desc && (
-        <small className="text-danger">
-          {String(errors.desc.message)}
-        </small>
-      )}
-    </div>
+                  {errors.desc && (
+                    <small className="text-danger">
+                      {String(errors.desc.message)}
+                    </small>
+                  )}
+                </div>
 
-    {/* Buttons */}
-    <div className="col-12">
-      <div className="button-wrapper">
+                {/* Buttons */}
+                <div className="col-12">
+                  <div className="button-wrapper">
 
-        <button
-          type="button"
-          className="btn btn-outline-secondary"
-          onClick={() => reset()}
-        >
-          <MdRefresh className="me-2" />
-          Reset
-        </button>
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary"
+                      onClick={() => reset()}
+                    >
+                      <MdRefresh className="me-2" />
+                      Reset
+                    </button>
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-        >
-          <FaSave className="me-2" />
-          Create Course
-        </button>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                    >
+                      <FaSave className="me-2" />
+                      Create Course
+                    </button>
 
-      </div>
-    </div>
+                  </div>
+                </div>
 
-  </div>
-</form>
+              </div>
+            </form>
 
           </div>
 

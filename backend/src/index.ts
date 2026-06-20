@@ -6,12 +6,24 @@ import { AppDataSource } from './DBconfig/dbconfig'
 import userRouter from './router/user/userrouter'
 import adminRouter from './router/admin/adminrouter'
 const app = express()
+import path from "path"
 
 app.use(express.json())
 app.use(cors())
-app.use(helmet())
-app.use("/thumbnail_images",express.static("thumbnail_images"))
-app.use("/course_content_files",express.static("course_content_files"))
+
+
+app.use(
+  helmet({
+    crossOriginResourcePolicy: {
+      policy: "cross-origin",
+    },
+  })
+);
+
+app.use("/thumbnail_images",express.static(
+    path.join(process.cwd(),"thumbnail_images")))
+app.use("/course_content_files",express.static(
+    path.join(process.cwd(),"course_content_files")))
 
 
 AppDataSource.initialize()
