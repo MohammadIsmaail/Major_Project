@@ -15,7 +15,7 @@ import {
   updateMasterPlanData,
 } from "../../controller/adminController/msterPlanData";
 
-import { masterCourseInsertData } from "../../controller/adminController/masterCourseData";
+import { masterCourseGetData, masterCourseInsertData } from "../../controller/adminController/masterCourseData";
 import { thumbnail_course_contents } from "../../helper/ImageFileUpload";
 const adminRouter = express.Router();
 
@@ -31,14 +31,13 @@ adminRouter.get("/get-single-master-plan/:id", getSingleMasterPlan);
 adminRouter.put("/update-master-plan/:id", updateMasterPlanData);
 
 //  Master Course  masterCourseGetData
-adminRouter.post(
-  "/create-master-course",
-  thumbnail_course_contents.fields([
+adminRouter.post( "/create-master-course",thumbnail_course_contents.fields([
     { name: "thumbnail", maxCount: 1 },
-    { name: "content", maxCount: 1 },
-  ]),
-  masterCourseInsertData
-);
+    { name: "content", maxCount: 1 },]),masterCourseInsertData
+  );
+
+
+adminRouter.get("/get-master-course", masterCourseGetData);
 
 
 
