@@ -7,8 +7,6 @@ import AdminLogin from "./landing/adminLogin"
 import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminDashboard from "./components/adminDashboard/adminDashboard"
-import Layout from "./components/userDashboard/layout"
-import User from "./components/userDashboard/user"
 import NavbarUserDashboard from "./components/userDashboard/NavbarUserDashboard"
 import DashBoardAdminShow from "./components/adminDashboard/DashBoardAdminShow"
 import ManageUserAdmin from "./components/adminDashboard/ManageUserAdmin"
@@ -17,6 +15,10 @@ import MasterPlanAdmin from "./components/adminDashboard/MasterPlanAdmin"
 import CreateMasterCourseAdmin from "./components/adminDashboard/CreateMasterCourseAdmin"
 import MasterCourseAdmin from "./components/adminDashboard/MasterCourseAdmin"
 import { AuthGuardProtected, AuthGuardPublic } from "./hoc/AuthGuard/AuthGuard"
+import Plan from "./components/userDashboard/Plan"
+import Purchase_Plan from "./components/userDashboard/Purchase_Plan"
+import View_Course from "./components/userDashboard/View_Course"
+import DashboardUser from "./components/userDashboard/DashboardUser"
 
 
 function App() {
@@ -31,8 +33,10 @@ function App() {
 
           {/* UserDashboard */}
           <Route path="/NavbarUserDashboard" element={<AuthGuardProtected><NavbarUserDashboard /></AuthGuardProtected>} />
-          <Route path="/layout" element={<AuthGuardProtected><NavbarUserDashboard><Layout /></NavbarUserDashboard></AuthGuardProtected>} />
-          <Route path="/user" element={<AuthGuardProtected><NavbarUserDashboard><User /></NavbarUserDashboard></AuthGuardProtected>} />
+          <Route path="/Plan" element={<AuthGuardProtected><NavbarUserDashboard><Plan /></NavbarUserDashboard></AuthGuardProtected>} />
+          <Route path="/Purchase_Plan" element={<AuthGuardProtected><NavbarUserDashboard><Purchase_Plan /></NavbarUserDashboard></AuthGuardProtected>} />
+          <Route path="/View_Course" element={<AuthGuardProtected><NavbarUserDashboard><View_Course /></NavbarUserDashboard></AuthGuardProtected>} />
+          <Route path="/DashboardUser" element={<AuthGuardProtected><NavbarUserDashboard><DashboardUser /></NavbarUserDashboard></AuthGuardProtected>} />
 
 
 

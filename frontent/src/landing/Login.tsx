@@ -62,7 +62,7 @@ function Login() {
                 });
                 storeData("token",res.result.token)
                 reset();
-                navigate("/layout"); // optional
+                navigate("/DashboardUser"); // optional
                
             } else {
                 toast.error(`${res.message}`, {
@@ -150,7 +150,7 @@ function Login() {
                                 </div>
 
                                 <button className="btn btn-primary w-100 py-2 fw-bold">
-                                    Register Now
+                                    Login Now
                                 </button>
                                 <p className="text-center mt-3 mb-0">
                                     Already have an account?{" "}

@@ -1,0 +1,158 @@
+.user-dashboard {
+  min-height: 100vh;
+  background: #f4f7fc;
+}
+
+/* Welcome */
+
+.welcome-card {
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5
+  );
+
+  color: white;
+  padding: 30px;
+  border-radius: 20px;
+
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+}
+
+.welcome-card h2 {
+  font-weight: 700;
+}
+
+.welcome-card p {
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* Stats */
+
+.user-stat-card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  text-align: center;
+
+  transition: 0.3s;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.user-stat-card:hover {
+  transform: translateY(-6px);
+}
+
+.stat-icon {
+  font-size: 40px;
+  color: #2563eb;
+  margin-bottom: 15px;
+}
+
+.user-stat-card h3 {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.user-stat-card p {
+  color: #64748b;
+  margin: 0;
+}
+
+/* Sections */
+
+.dashboard-section {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.section-header h4 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Course Card */
+
+.course-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+}
+
+.course-card h5 {
+  font-weight: 700;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 30px;
+}
+
+.progress-bar {
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #4f46e5
+  );
+}
+
+.continue-btn {
+  width: 100%;
+  border: none;
+
+  background: #2563eb;
+  color: white;
+
+  padding: 10px;
+  border-radius: 10px;
+
+  font-weight: 600;
+}
+
+.continue-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Activity */
+
+.activity-card {
+  background: #f8fafc;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.activity-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.activity-card li {
+  margin-bottom: 12px;
+  color: #374151;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .welcome-card {
+    padding: 20px;
+  }
+
+  .welcome-card h2 {
+    font-size: 24px;
+  }
+
+  .dashboard-section {
+    padding: 18px;
+  }
+}

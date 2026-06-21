@@ -1,0 +1,318 @@
+/* =========================
+   PAGE
+========================= */
+
+.purchase-page {
+  min-height: 100vh;
+  padding: 25px;
+  background: #f8fafc;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.purchase-hero {
+  background: linear-gradient(
+    135deg,
+    #111827,
+    #1e1b4b
+  );
+
+  color: white;
+
+  padding: 45px;
+
+  border-radius: 28px;
+
+  text-align: center;
+
+  margin-bottom: 35px;
+}
+
+.purchase-hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.purchase-hero p {
+  opacity: 0.85;
+  margin: 0;
+  font-size: 15px;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.plans-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(280px, 1fr));
+
+  gap: 25px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.pricing-card {
+  position: relative;
+
+  background: #ffffff;
+
+  border-radius: 28px;
+
+  padding: 24px;
+
+  min-height: 340px;
+
+  border: 1px solid #e5e7eb;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: all 0.35s ease;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 30px rgba(
+      0,
+      0,
+      0,
+      0.06
+    );
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow:
+    0 20px 45px rgba(
+      79,
+      70,
+      229,
+      0.12
+    );
+}
+
+/* =========================
+   FEATURED CARD
+========================= */
+
+.featured-card {
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed
+  );
+
+  color: white;
+
+  transform: scale(1.03);
+
+  border: none;
+}
+
+.featured-card:hover {
+  transform: scale(1.03)
+    translateY(-8px);
+}
+
+.featured-card .plan-name,
+.featured-card .price,
+.featured-card .features div {
+  color: white;
+}
+
+/* =========================
+   POPULAR BADGE
+========================= */
+
+.popular-badge {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+
+  background: rgba(
+    255,
+    255,
+    255,
+    0.15
+  );
+
+  backdrop-filter: blur(12px);
+
+  color: white;
+
+  padding: 6px 14px;
+
+  border-radius: 30px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.plan-name {
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  color: #64748b;
+
+  text-align: center;
+
+  margin-top: 10px;
+}
+
+.price {
+  text-align: center;
+
+  font-size: 54px;
+
+  font-weight: 800;
+
+  color: #111827;
+
+  margin-top: 10px;
+}
+
+/* =========================
+   CREDIT BOX
+========================= */
+
+.credit-box {
+  margin: 18px 0;
+
+  padding: 14px;
+
+  border-radius: 16px;
+
+  text-align: center;
+
+  font-weight: 700;
+
+  background: linear-gradient(
+    135deg,
+    #eef2ff,
+    #f5f3ff
+  );
+
+  color: #4f46e5;
+}
+
+.featured-card .credit-box {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.15
+  );
+
+  color: white;
+
+  backdrop-filter: blur(10px);
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+  flex: 1;
+}
+
+.features div {
+  padding: 9px 0;
+
+  color: #475569;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  font-size: 14px;
+}
+
+.features div:last-child {
+  border-bottom: none;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.purchase-btn {
+  margin-top: 18px;
+
+  width: 100%;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed
+  );
+
+  transition: all 0.3s ease;
+}
+
+.purchase-btn:hover {
+  transform: translateY(-2px);
+}
+
+.featured-card .purchase-btn {
+  background: white;
+  color: #4f46e5;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+  .purchase-page {
+    padding: 15px;
+  }
+
+  .purchase-hero {
+    padding: 30px 20px;
+  }
+
+  .purchase-hero h1 {
+    font-size: 30px;
+  }
+
+  .featured-card {
+    transform: none;
+  }
+
+  .pricing-card {
+    min-height: auto;
+  }
+}
