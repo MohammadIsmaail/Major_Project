@@ -50,23 +50,30 @@ export const updateMasterPlan = async (id: any,data: any) => {
   return res.data;
 };
 
-
-
 // Course
 export const createMasterCourse = async(data:any)=>{
   const res = await axios.post(`${BASE_URL}/admin/create-master-course`,data)
   return res.data
 }
 
-
 export const getMasterCourse = async () => {
   const res = await axios.get(`${BASE_URL}/admin/get-master-course/`,);
   return res.data;
 };
 
-
-
 export const deleteMasterCourse = async (id:any) => {
-  const res = await axios.put(`${BASE_URL}/admin/delete-master-course/${id}`,);
+  const res = await axios.delete(`${BASE_URL}/admin/delete-master-course/${id}`,);
+  return res.data;
+};
+
+
+export const getSingleMasterCourse = async (id: any) => {
+  const res = await axios.get(`${BASE_URL}/admin/single-master-course/${id}`);
+  return res?.data;
+};
+
+
+export const updateMasterCourse = async (id: any,data: any) => {
+  const res = await axios.put(`${BASE_URL}/admin/update-master-course/${id}`,data);
   return res.data;
 };

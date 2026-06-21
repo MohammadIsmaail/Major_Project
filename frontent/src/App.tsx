@@ -6,7 +6,7 @@ import Login from "./landing/Login"
 import AdminLogin from "./landing/adminLogin"
 import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import  AdminDashboard  from "./components/adminDashboard/adminDashboard"
+import AdminDashboard from "./components/adminDashboard/adminDashboard"
 import Layout from "./components/userDashboard/layout"
 import User from "./components/userDashboard/user"
 import NavbarUserDashboard from "./components/userDashboard/NavbarUserDashboard"
@@ -16,15 +16,15 @@ import CreateMasterPlanAdmin from "./components/adminDashboard/CreateMasterPlanA
 import MasterPlanAdmin from "./components/adminDashboard/MasterPlanAdmin"
 import CreateMasterCourseAdmin from "./components/adminDashboard/CreateMasterCourseAdmin"
 import MasterCourseAdmin from "./components/adminDashboard/MasterCourseAdmin"
-import {AuthGuardProtected,AuthGuardPublic} from "./hoc/AuthGuard/AuthGuard"
+import { AuthGuardProtected, AuthGuardPublic } from "./hoc/AuthGuard/AuthGuard"
 
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes> 
-          <Route path="/" element={<AuthGuardPublic><Home /></AuthGuardPublic>} />
+        <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/register" element={<AuthGuardPublic><Register /></AuthGuardPublic>} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
@@ -33,10 +33,10 @@ function App() {
           <Route path="/NavbarUserDashboard" element={<AuthGuardProtected><NavbarUserDashboard /></AuthGuardProtected>} />
           <Route path="/layout" element={<AuthGuardProtected><NavbarUserDashboard><Layout /></NavbarUserDashboard></AuthGuardProtected>} />
           <Route path="/user" element={<AuthGuardProtected><NavbarUserDashboard><User /></NavbarUserDashboard></AuthGuardProtected>} />
-        
-         
-         
-            {/* AdminDashboard */}
+
+
+
+          {/* AdminDashboard */}
           <Route path="/adminDashboard" element={<AuthGuardProtected><AdminDashboard /></AuthGuardProtected>} />
           <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/ManageUserAdmin" element={<AuthGuardProtected> <AdminDashboard><ManageUserAdmin /></AdminDashboard></AuthGuardProtected>} />
@@ -45,9 +45,20 @@ function App() {
           <Route path="/CreateMasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/MasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><MasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
+
+          <Route
+            path="/CreateMasterCourseAdmin/:id"
+            element={
+              <AuthGuardProtected>
+                <AdminDashboard>
+                  <CreateMasterCourseAdmin />
+                </AdminDashboard>
+              </AuthGuardProtected>
+            }
+          />
         </Routes>
       </BrowserRouter>
-      
+
 
       <ToastContainer
         position="bottom-right"

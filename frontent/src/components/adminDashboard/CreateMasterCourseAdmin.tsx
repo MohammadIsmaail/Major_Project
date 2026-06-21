@@ -1,17 +1,19 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import "../../styles/CreateMasterCourseAdmin.css";
+import { useParams } from "react-router-dom";
+import { toast, Bounce } from "react-toastify";
 import { FaSave } from "react-icons/fa";
 import { MdRefresh } from "react-icons/md";
-import { createMasterCourse } from "../../services/API";
-import { toast, Bounce } from "react-toastify";
+import "../../styles/CreateMasterCourseAdmin.css";
+import {
+  createMasterCourse,
+  getSingleMasterCourse,
+  updateMasterCourse,
+} from "../../services/API";
 
 const schema = yup.object().shape({
-  thumbnail: yup
-    .mixed<any>()
-    .required("Thumbnail Image is required"),
-
   title: yup
     .string()
     .required("Course Title is required")
@@ -33,25 +35,46 @@ const schema = yup.object().shape({
 
   type: yup.string().required("Course Type is required"),
 
-  content: yup
-    .mixed<any>()
-    .required("Course File is required"),
+  thumbnail: yup.mixed<any>(),
+
+  content: yup.mixed<any>(),
 
   status: yup.number().oneOf([0, 1]),
 });
 
 const CreateMasterCourseAdmin = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<any>({
+
+  const { id } = useParams()
+
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm<any>({
     resolver: yupResolver(schema),
     defaultValues: {
       status: 1,
     },
   });
+
+  useEffect(() => {
+    if (id) {
+      getCourseData();
+    }
+  }, [id]);
+
+  const getCourseData = async () => {
+    try {
+      const res: any = await getSingleMasterCourse(id);
+      reset({
+        title: res.result.title,
+        desc: res.result.desc,
+        level: res.result.level,
+        rating: res.result.rating,
+        duration: res.result.duration,
+        type: res.result.type,
+        status: res.result.status,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onSubmit = async (data: any) => {
     try {
@@ -64,30 +87,48 @@ const CreateMasterCourseAdmin = () => {
       formData.append("duration", data.duration);
       formData.append("type", data.type);
       formData.append("status", String(data.status));
-      formData.append("thumbnail", data.thumbnail[0]);
-      formData.append("content", data.content[0]);
 
-      console.log(formData);
+      if (data.thumbnail?.[0]) {
+        formData.append("thumbnail", data.thumbnail[0]);
+      }
 
-      const res = await createMasterCourse(formData);
+      if (data.content?.[0]) {
+        formData.append("content", data.content[0]);
+      }
+
+      let res: any;
+
+      if (id) {
+        res = await updateMasterCourse(id, formData);
+      } else {
+        res = await createMasterCourse(formData);
+      }
+
       if (res.success) {
         toast.success(res.message, {
           position: "bottom-right",
           transition: Bounce,
         });
-        alert("Course Created Successfully");
-        reset();
-      }else{
-         toast.error(res.message, {
-        position: "bottom-right",
-        transition: Bounce,
-      });
-      }
 
-    } catch (error) {
-      console.log(error);
+        if (!id) {
+          reset();
+        }
+      } else {
+        toast.error(res.message, {
+          position: "bottom-right",
+          transition: Bounce,
+        });
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message ||
+        "Something went wrong!"
+      );
     }
   };
+
+
+
 
   return (
     <div className="container-fluid master-course-container">
@@ -99,7 +140,7 @@ const CreateMasterCourseAdmin = () => {
             <div className="header-section">
               <div>
                 <h2 className="page-title">
-                  Create Master Course
+                  {id ? "Edit Master Course" : "Create Master Course"}
                 </h2>
 
                 <p className="page-subtitle">
@@ -289,7 +330,7 @@ const CreateMasterCourseAdmin = () => {
                       className="btn btn-primary"
                     >
                       <FaSave className="me-2" />
-                      Create Course
+                      {id ? "Update Course" : "Create Course"}
                     </button>
 
                   </div>

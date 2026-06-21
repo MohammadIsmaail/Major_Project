@@ -26,6 +26,7 @@ const MasterCourseAdmin = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(false);
 
+
   const fetchCourses = async () => {
     try {
       setLoading(true);
@@ -44,6 +45,7 @@ const MasterCourseAdmin = () => {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     fetchCourses();
@@ -222,9 +224,10 @@ const MasterCourseAdmin = () => {
                   <div className="button-group">
 
                     <Link
-                      to={`/admin/create-master-course?id=${course.id}`}
+                      to={`/CreateMasterCourseAdmin/${course.id}`}
                       className="btn btn-warning course-btn flex-fill"
                     >
+                    
                       Edit
                     </Link>
 
