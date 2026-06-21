@@ -3,6 +3,9 @@ import bcrypt from "bcrypt";
 import { generateToken } from "../../helper/jwt";
 import { admin } from "../../entities/admin";
 
+import { masterplan } from "../../entities/masterplan";
+import { mastercourse } from "../../entities/mastercourse";
+
 
 export const adminRegister = async (req: any, res: any) => {
  
@@ -46,4 +49,61 @@ export const adminLogin = async (req: any, res: any) => {
 
  }
 
+};
+
+
+export const getDashboardStats = async (req: any, res: any) => {
+  try {
+    const totalUsers = await admin.count();
+    const totalPlans = await masterplan.count();
+    const totalCourses = await mastercourse.count();
+
+    const result = {
+      users: {
+        total: totalUsers,
+        active: totalUsers,
+      },
+
+      plans: {
+        total: totalPlans,
+        active: totalPlans,
+      },
+
+      courses: {
+        total: totalCourses,
+        active: totalCourses,
+      },
+
+      graphData: [
+        { name: "Jan", users: 5, courses: 2 },
+        { name: "Feb", users: 10, courses: 5 },
+        { name: "Mar", users: 15, courses: 8 },
+        { name: "Apr", users: 20, courses: 12 },
+        { name: "May", users: 25, courses: 18 },
+        { name: "Jun", users: totalUsers, courses: totalCourses },
+      ],
+    };
+
+    return createResponse(
+      res,
+      true,
+      200,
+      "Dashboard Stats Fetch Successfully!",
+      result,
+      false
+    );
+  } catch (err) {
+    console.log("Dashboard Error =>", err);
+
+    return createResponse(
+      res,
+      false,
+      500,
+      err instanceof Error
+        ? err.message
+        : "Internal Server Error!",
+      [],
+      true
+    );
+  }
 };

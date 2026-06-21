@@ -19,8 +19,11 @@ export const adminLoginService = async (_data:any) => {
 
 // dfghjk
 export const getDashboardStats = async () => {
-  const res = await axios.get(`${BASE_URL}/admin/get-dashboard-stats`);
-  return res?.data;
+  const response = await axios.get(
+    `${BASE_URL}/admin/admin-dashboard-stats`
+  );
+
+  return response.data;
 };
 
 

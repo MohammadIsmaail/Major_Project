@@ -2,6 +2,7 @@ import express from "express";
 import {
   adminLogin,
   adminRegister,
+  getDashboardStats,
 } from "../../controller/adminController/authAdminController";
 import {
   AdminLogRatelimit,
@@ -59,4 +60,6 @@ adminRouter.put(
   masterCourseUpdateData,
 );
 
+
+adminRouter.get("/admin-dashboard-stats", getDashboardStats);
 export default adminRouter;

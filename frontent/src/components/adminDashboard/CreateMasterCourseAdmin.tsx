@@ -46,6 +46,8 @@ const CreateMasterCourseAdmin = () => {
 
   const { id } = useParams()
 
+  console.log("ID => ", id);
+
   const { register, handleSubmit, reset, formState: { errors }, } = useForm<any>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -54,6 +56,7 @@ const CreateMasterCourseAdmin = () => {
   });
 
   useEffect(() => {
+    console.log("ID Changed =>", id);
     if (id) {
       getCourseData();
     }
@@ -62,6 +65,7 @@ const CreateMasterCourseAdmin = () => {
   const getCourseData = async () => {
     try {
       const res: any = await getSingleMasterCourse(id);
+      console.log("ID Changed =>", id);
       reset({
         title: res.result.title,
         desc: res.result.desc,
