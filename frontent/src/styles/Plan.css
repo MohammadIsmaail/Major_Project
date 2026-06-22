@@ -1,0 +1,28 @@
+.plan-page {
+  padding: 30px;
+}
+
+.plan-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+  transition: .3s;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+}
+
+.plan-credit {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.plan-price {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 10px 0;
+}
