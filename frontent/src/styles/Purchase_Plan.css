@@ -13,11 +13,9 @@
 ========================= */
 
 .purchase-hero {
-  background: linear-gradient(
-    135deg,
-    #111827,
-    #1e1b4b
-  );
+  background: linear-gradient(135deg,
+      #111827,
+      #1e1b4b);
 
   color: white;
 
@@ -80,24 +78,20 @@
   overflow: hidden;
 
   box-shadow:
-    0 10px 30px rgba(
+    0 10px 30px rgba(0,
       0,
       0,
-      0,
-      0.06
-    );
+      0.06);
 }
 
 .pricing-card:hover {
   transform: translateY(-8px);
 
   box-shadow:
-    0 20px 45px rgba(
-      79,
+    0 20px 45px rgba(79,
       70,
       229,
-      0.12
-    );
+      0.12);
 }
 
 /* =========================
@@ -105,11 +99,9 @@
 ========================= */
 
 .featured-card {
-  background: linear-gradient(
-    135deg,
-    #4f46e5,
-    #7c3aed
-  );
+  background: linear-gradient(135deg,
+      #4f46e5,
+      #7c3aed);
 
   color: white;
 
@@ -119,8 +111,7 @@
 }
 
 .featured-card:hover {
-  transform: scale(1.03)
-    translateY(-8px);
+  transform: scale(1.03) translateY(-8px);
 }
 
 .featured-card .plan-name,
@@ -139,12 +130,10 @@
   top: 15px;
   right: 15px;
 
-  background: rgba(
-    255,
-    255,
-    255,
-    0.15
-  );
+  background: rgba(255,
+      255,
+      255,
+      0.15);
 
   backdrop-filter: blur(12px);
 
@@ -206,22 +195,18 @@
 
   font-weight: 700;
 
-  background: linear-gradient(
-    135deg,
-    #eef2ff,
-    #f5f3ff
-  );
+  background: linear-gradient(135deg,
+      #eef2ff,
+      #f5f3ff);
 
   color: #4f46e5;
 }
 
 .featured-card .credit-box {
-  background: rgba(
-    255,
-    255,
-    255,
-    0.15
-  );
+  background: rgba(255,
+      255,
+      255,
+      0.15);
 
   color: white;
 
@@ -273,11 +258,9 @@
 
   color: white;
 
-  background: linear-gradient(
-    135deg,
-    #4f46e5,
-    #7c3aed
-  );
+  background: linear-gradient(135deg,
+      #4f46e5,
+      #7c3aed);
 
   transition: all 0.3s ease;
 }
