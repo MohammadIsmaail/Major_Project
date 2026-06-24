@@ -177,10 +177,10 @@ const CreateMasterCourseAdmin = () => {
                   )}
                 </div>
 
-                {/* Status ka hai */}
+                {/* Status  */}
                 <div className="col-md-4">
                   <label className="form-label-premium">
-                    Status
+                               Status
                   </label>
 
                   <select
@@ -209,7 +209,7 @@ const CreateMasterCourseAdmin = () => {
                   </select>
                 </div>
 
-                {/* Rating  hai */}
+                {/* Rating   */}
                 <div className="col-md-3">
                   <label className="form-label-premium">
                     Rating
