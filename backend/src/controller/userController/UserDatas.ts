@@ -7,8 +7,10 @@ import { createResponse } from "../../helper/createResponse";
 
 export const userPurchasePlan = async (req: any, res: any) => {
   try {
-    const { plan_id } = req.body;
-    const user_id = req.user.id;
+    const { plan_id } = req.body;   // destructuring   const plan_id = req.body.plan_id;
+    const user_id = req.user.id;   //Ye authenticated user ka ID nikal raha hai.  
+    console.log(plan_id);
+    `console.log(user_id);       
     await plan.save({ user_id, plan_id });
     const masterplanRes = await masterplan.findOne({ where: { id: plan_id } });
     const userRes = await user.findOne({ where: { id: user_id } });
