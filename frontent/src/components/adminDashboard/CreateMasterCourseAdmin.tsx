@@ -131,9 +131,6 @@ const CreateMasterCourseAdmin = () => {
     }
   };
 
-
-
-
   return (
     <div className="container-fluid master-course-container">
       <div className="row justify-content-center">
@@ -160,7 +157,7 @@ const CreateMasterCourseAdmin = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="row g-2">
 
-                {/* Course Title */}
+                {/* Course   Title */}
                 <div className="col-md-8">
                   <label className="form-label-premium">
                     Course Title
@@ -180,7 +177,7 @@ const CreateMasterCourseAdmin = () => {
                   )}
                 </div>
 
-                {/* Status */}
+                {/* Status ka hai */}
                 <div className="col-md-4">
                   <label className="form-label-premium">
                     Status
@@ -212,7 +209,7 @@ const CreateMasterCourseAdmin = () => {
                   </select>
                 </div>
 
-                {/* Rating */}
+                {/* Rating  hai */}
                 <div className="col-md-3">
                   <label className="form-label-premium">
                     Rating
