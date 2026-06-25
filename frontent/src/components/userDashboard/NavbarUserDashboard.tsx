@@ -22,7 +22,7 @@ const NavbarUserDashboard = ({ children }: any) => {
         {
             url: "/Plan",
             icon: FaUsers,
-            name: "Plan"
+            name: "My Plan"
         },
         {
             url: "/View_Course",
