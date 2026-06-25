@@ -81,71 +81,44 @@ export const updateMasterCourse = async (id: any,data: any) => {
   return res.data;
 };
 
-
 //    User 
-
-// =========================
-// User Plans
-// =========================
-
 export const getUserPlans = async () => {
-  const res = await axios.get(
-    `${BASE_URL}/admin/get-master-plan`
-  );
-
+  const res = await axios.get(`${BASE_URL}/admin/get-master-plan`);
   return res.data;
 };
 
 export const purchasePlanService = async (plan_id: number) => {
   const token = localStorage.getItem("token");
-
-  const res = await axios.post(
-    `${BASE_URL}/user/purchase-plan`,
-    { plan_id },
+  const res = await axios.post(`${BASE_URL}/user/purchase-plan`,{ plan_id },
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
   );
-
   return res.data;
 };
-
-// =========================
 // Purchased Plans
-// =========================
-
 export const purchasedPlanService = async () => {
   const token = localStorage.getItem("token");
-
-  const res = await axios.get(
-    `${BASE_URL}/user/PurchasedPlanUser`,
+  const res = await axios.get(`${BASE_URL}/user/PurchasedPlanUser`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
   );
-
   return res.data;
 };
-
-// =========================
 // View Course
-// =========================
-
 export const viewCourseService = async () => {
   const token = localStorage.getItem("token");
-
-  const res = await axios.get(
-    `${BASE_URL}/user/user-view-course`,
+  const res = await axios.get(`${BASE_URL}/user/user-view-course`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
   );
-
   return res.data;
 };
