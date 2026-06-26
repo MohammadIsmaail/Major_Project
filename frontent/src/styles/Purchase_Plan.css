@@ -1,301 +1,151 @@
-/* =========================
-   PAGE
-========================= */
-
-.purchase-page {
-  min-height: 100vh;
-  padding: 25px;
-  background: #f8fafc;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* =========================
-   HERO
-========================= */
-
-.purchase-hero {
-  background: linear-gradient(135deg,
-      #111827,
-      #1e1b4b);
-
-  color: white;
-
-  padding: 45px;
-
-  border-radius: 28px;
-
-  text-align: center;
-
-  margin-bottom: 35px;
+.purchase-plan-page{
+    width:100%;
+    background:#f6f8fc;
+    padding:40px 30px 60px;
 }
 
-.purchase-hero h1 {
-  font-size: 38px;
-  font-weight: 800;
-  margin-bottom: 10px;
+.purchase-plan-heading{
+    font-size:30px;
+    font-weight:700;
+    color:#222;
+    margin-bottom:35px;
 }
 
-.purchase-hero p {
-  opacity: 0.85;
-  margin: 0;
-  font-size: 15px;
+.plans-grid{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:25px;
+    flex-wrap:wrap;
 }
 
-/* =========================
-   GRID
-========================= */
-
-.plans-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(280px, 1fr));
-
-  gap: 25px;
+.plan-card{
+    width:280px;
+    background:#fff;
+    border-radius:16px;
+    padding:25px 22px;
+    position:relative;
+    overflow:visible;
+    border:1px solid #ececec;
+    box-shadow:0 8px 20px rgba(0,0,0,.06);
+    transition:.3s;
 }
 
-/* =========================
-   CARD
-========================= */
-
-.pricing-card {
-  position: relative;
-
-  background: #ffffff;
-
-  border-radius: 28px;
-
-  padding: 24px;
-
-  min-height: 340px;
-
-  border: 1px solid #e5e7eb;
-
-  display: flex;
-  flex-direction: column;
-
-  transition: all 0.35s ease;
-
-  overflow: hidden;
-
-  box-shadow:
-    0 10px 30px rgba(0,
-      0,
-      0,
-      0.06);
+.plan-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
 }
 
-.pricing-card:hover {
-  transform: translateY(-8px);
-
-  box-shadow:
-    0 20px 45px rgba(79,
-      70,
-      229,
-      0.12);
+.featured{
+    border:2px solid #5b4dff;
 }
 
-/* =========================
-   FEATURED CARD
-========================= */
-
-.featured-card {
-  background: linear-gradient(135deg,
-      #4f46e5,
-      #7c3aed);
-
-  color: white;
-
-  transform: scale(1.03);
-
-  border: none;
+.recommended-badge{
+    position:absolute;
+    left:50%;
+    top:0;
+    transform:translate(-50%,-50%);
+    background:#5b4dff;
+    color:#fff;
+    padding:6px 18px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:600;
+    white-space:nowrap;
+    z-index:9999;
 }
 
-.featured-card:hover {
-  transform: scale(1.03) translateY(-8px);
+.plan-price{
+    font-size:36px;
+    font-weight:700;
+    color:#222;
+    margin-top:8px;
 }
 
-.featured-card .plan-name,
-.featured-card .price,
-.featured-card .features div {
-  color: white;
+.plan-name{
+    font-size:22px;
+    font-weight:600;
+    margin-top:6px;
 }
 
-/* =========================
-   POPULAR BADGE
-========================= */
-
-.popular-badge {
-  position: absolute;
-
-  top: 15px;
-  right: 15px;
-
-  background: rgba(255,
-      255,
-      255,
-      0.15);
-
-  backdrop-filter: blur(12px);
-
-  color: white;
-
-  padding: 6px 14px;
-
-  border-radius: 30px;
-
-  font-size: 11px;
-
-  font-weight: 700;
+.plan-discount{
+    font-size:14px;
+    color:#777;
+    margin:15px 0 18px;
 }
 
-/* =========================
-   CONTENT
-========================= */
-
-.plan-name {
-  text-transform: uppercase;
-
-  letter-spacing: 1px;
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  color: #64748b;
-
-  text-align: center;
-
-  margin-top: 10px;
+.purchase-btn{
+    width:100%;
+    height:44px;
+    border:none;
+    border-radius:8px;
+    background:#5b4dff;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
 }
 
-.price {
-  text-align: center;
-
-  font-size: 54px;
-
-  font-weight: 800;
-
-  color: #111827;
-
-  margin-top: 10px;
+.purchase-btn:hover{
+    background:#4534ff;
 }
 
-/* =========================
-   CREDIT BOX
-========================= */
-
-.credit-box {
-  margin: 18px 0;
-
-  padding: 14px;
-
-  border-radius: 16px;
-
-  text-align: center;
-
-  font-weight: 700;
-
-  background: linear-gradient(135deg,
-      #eef2ff,
-      #f5f3ff);
-
-  color: #4f46e5;
+.features-list{
+    list-style:none;
+    margin-top:18px;
 }
 
-.featured-card .credit-box {
-  background: rgba(255,
-      255,
-      255,
-      0.15);
-
-  color: white;
-
-  backdrop-filter: blur(10px);
+.features-list li{
+    display:flex;
+    align-items:center;
+    margin-bottom:12px;
+    font-size:14px;
+    color:#555;
 }
 
-/* =========================
-   FEATURES
-========================= */
-
-.features {
-  flex: 1;
+.check-icon{
+    width:20px;
+    height:20px;
+    min-width:20px;
+    border-radius:50%;
+    background:#eaf9ef;
+    color:#21b55d;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-right:10px;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.features div {
-  padding: 9px 0;
-
-  color: #475569;
-
-  border-bottom: 1px solid #f1f5f9;
-
-  font-size: 14px;
+.features-list strong{
+    color:#222;
 }
 
-.features div:last-child {
-  border-bottom: none;
+@media(max-width:768px){
+
+.purchase-plan-page{
+    padding:25px 15px;
 }
 
-/* =========================
-   BUTTON
-========================= */
-
-.purchase-btn {
-  margin-top: 18px;
-
-  width: 100%;
-
-  border: none;
-
-  padding: 14px;
-
-  border-radius: 14px;
-
-  font-size: 15px;
-
-  font-weight: 700;
-
-  cursor: pointer;
-
-  color: white;
-
-  background: linear-gradient(135deg,
-      #4f46e5,
-      #7c3aed);
-
-  transition: all 0.3s ease;
+.purchase-plan-heading{
+    text-align:center;
 }
 
-.purchase-btn:hover {
-  transform: translateY(-2px);
+.plans-grid{
+    flex-direction:column;
+    align-items:center;
 }
 
-.featured-card .purchase-btn {
-  background: white;
-  color: #4f46e5;
+.plan-card{
+    width:100%;
+    max-width:330px;
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 768px) {
-  .purchase-page {
-    padding: 15px;
-  }
-
-  .purchase-hero {
-    padding: 30px 20px;
-  }
-
-  .purchase-hero h1 {
-    font-size: 30px;
-  }
-
-  .featured-card {
-    transform: none;
-  }
-
-  .pricing-card {
-    min-height: auto;
-  }
 }

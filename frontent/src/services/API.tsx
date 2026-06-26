@@ -82,10 +82,10 @@ export const updateMasterCourse = async (id: any,data: any) => {
 };
 
 //    User 
-// export const getUserPlans = async () => {
-//   const res = await axios.get(`${BASE_URL}/admin/get-master-plan`);
-//   return res.data;
-// };
+export const getUserPlans = async () => {
+  const res = await axios.get(`${BASE_URL}/admin/get-master-plan`);
+  return res.data;
+};
 
 export const purchasePlanService = async (plan_id: any) => {
   const token = localStorage.getItem("token");
