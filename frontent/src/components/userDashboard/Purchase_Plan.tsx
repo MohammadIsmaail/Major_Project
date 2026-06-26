@@ -51,11 +51,11 @@ const Purchase_Plan = () => {
             <div className="plan-name">{plan.name}</div>
             <div className="plan-discount">{plan.discount}</div>
             <button
-  className="purchase-btn"
-  onClick={() => purchase_Data(plan.id)}
->
-  Purchase Plan
-</button>
+              className="purchase-btn"
+              onClick={() => purchase_Data(plan.id)}
+            >
+              Purchase Plan
+            </button>
             <ul className="features-list">
               <li><span className="check-icon">✓</span><span><strong>{plan.credits} Credits</strong></span></li>
               <li><span className="check-icon">✓</span><span>{plan.perCredit}</span></li>
