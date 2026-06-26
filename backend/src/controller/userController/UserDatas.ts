@@ -10,9 +10,9 @@ export const userPurchasePlan = async (req: any, res: any) => {
     const {plan_id} = req.body    // destructuring   const plan_id = req.body.plan_id;
     const user_id = req.user.id;    //Ye authenticated user ka ID nikal raha hai.
     await plan.save({ user_id, plan_id });
+    const UserCredit = await user.findOne({where:{id:user_id}})
     const masterPlanRes = await masterplan.findOne({ where: { id: plan_id } });
-    const userRes = await user.findOne({ where: { id: user_id } });
-    const finalCredit =Number(masterPlanRes?.credit || 0) + Number(userRes?.credit || 0);
+    const finalCredit =Number(masterPlanRes?.credit || 0) + Number(UserCredit?.credit || 0);
     await user.update({ id: user_id }, { credit: finalCredit } as any);
     return createResponse( res,true,200,"Plans created  successfully",finalCredit,false,);
   } catch (error: any) {
@@ -29,24 +29,9 @@ export const PurchasedPlanUser = async (req: any, res: any) => {
       .leftJoinAndSelect(masterplan, "mp", "mp.id = plan.plan_id")
       .where("plan.user_id = :user_id", { user_id })
       .getRawMany();
-
-    return createResponse(
-      res,
-      true,
-      200,
-      "Plans fetched successfully",
-      data,
-      false,
-    );
+      return createResponse(res,true,200,"Plans fetched successfully",data,false,);
   } catch (error: any) {
-    return createResponse(
-      res,
-      false,
-      500,
-      error.message || "Internal Server Error",
-      [],
-      true,
-    );
+    return createResponse(res,false,500,error.message || "Internal Server Error",[],true,);
   }
 };
 

@@ -10,7 +10,7 @@ userRouter.post("/login",UserLoginRatelimit,userLogin)
 
 //Plan
 userRouter.post("/purchase-plan",UserLoginRatelimit,verifyToken,userPurchasePlan)
-userRouter.get("/PurchasedPlanUser",verifyToken,PurchasedPlanUser)
+userRouter.get("/Purchased-Plan-User",verifyToken,PurchasedPlanUser)
 // Course
 
 
