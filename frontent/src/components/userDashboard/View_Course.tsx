@@ -1,16 +1,18 @@
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { viewCourseService } from "../../services/API";
 import "../../styles/View_Course.css";
 
 const View_Course = () => {
-  const handleViewCourse = async () => {
+  const [courses, setCourses] = useState<any[]>([]);
+
+  const loadCourses = async () => {
     try {
       const res = await viewCourseService();
-
+      console.log(res.result)
+      console.log(res)
       if (res.success) {
-        toast.success(
-          "Course Access Granted. Credit Deducted."
-        );
+        setCourses(res.result || []);
       } else {
         toast.error(res.message);
       }
@@ -19,22 +21,61 @@ const View_Course = () => {
     }
   };
 
+  useEffect(() => {
+    loadCourses();
+  }, []);
+
   return (
     <div className="view-course-page">
-      <div className="course-card">
-        <h2>Premium Course Access</h2>
+      <h2 className="view-course-heading">
+        Purchase Course
+      </h2>
 
-        <p>
-          1 Credit will be deducted to access
-          course content.
-        </p>
+      <div className="view-course-grid">
+        {courses.map((course: any) => (
+          <div
+            className="view-course-card"
+            key={course.id}
+          >
+            <img
+              src={course.image}
+              alt={course.name}
+              className="view-course-image"
+            />
 
-        <button
-          className="btn btn-success"
-          onClick={handleViewCourse}
-        >
-          View Course
-        </button>
+            <div className="view-course-body">
+              <h3>{course.name}</h3>
+
+              <p className="view-course-desc">
+                {course.description}
+              </p>
+
+              <div className="view-course-info">
+                <span>{course.level}</span>
+
+                <span>⭐ {course.rating}</span>
+
+                <span>🕒 {course.duration}</span>
+              </div>
+
+              <div className="view-course-type">
+                {course.file_type}
+              </div>
+
+              <button
+                className="view-content-btn"
+                onClick={() =>
+                  window.open(
+                    course.file_url,
+                    "_blank"
+                  )
+                }
+              >
+                📄 View Content
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -34,3 +34,42 @@ export const PurchasedPlanUser = async (req: any, res: any) => {
   }
 };
 
+export const getMasterCourse = async (req: any, res: any) => {
+  try {
+    const result = await mastercourse.find({ order: { created_at: "DESC" } });
+    return createResponse(res,true,200,"Courses fetched successfully",result,false,);
+  } catch (error: any) {
+    return createResponse(res,false,500,error.message || "Internal Server Error",[],true,);
+  }
+};
+
+export const userViewCourse = async (req: any, res: any) => {
+  try {
+    const user_id = req.user.id;
+    const user1 = await user.findOne({ where: { id: user_id } });
+    const RemainingCredit = parseInt(user1?.credit);
+    if (RemainingCredit > 0) {
+      const final: any = RemainingCredit - 1;
+      await user.update({ id: user_id }, { credit: final });
+      return createResponse(res, true, 200, "success", [], false);
+    } else {
+      return createResponse(
+        res,
+        false,
+        400,
+        "You have insufficient credit please Purchase",
+        [],
+        true,
+      );
+    }
+  } catch (error: any) {
+    return createResponse(
+      res,
+      false,
+      500,
+      error.message || "Internal Server Error",
+      [],
+      true,
+    );
+  }
+};
