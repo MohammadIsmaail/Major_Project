@@ -101,7 +101,7 @@ export const purchasePlanService = async (plan_id: any) => {
 // Purchased Plans
 export const purchasedPlanService = async () => {
   const token = localStorage.getItem("token");
-  const res = await axios.get(`${BASE_URL}/user/PurchasedPlanUser`,
+  const res = await axios.get(`${BASE_URL}/user/Purchased-Plan-User`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
