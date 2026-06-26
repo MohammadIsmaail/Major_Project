@@ -4,20 +4,20 @@
     box-sizing:border-box;
 }
 
-.purchase-plan-page{
+.user-purchase-plan-page{
     width:100%;
     background:#f6f8fc;
     padding:40px 30px 60px;
 }
 
-.purchase-plan-heading{
+.user-purchase-plan-heading{
     font-size:30px;
     font-weight:700;
     color:#222;
     margin-bottom:35px;
 }
 
-.plans-grid{
+.user-plans-grid{
     display:flex;
     justify-content:center;
     align-items:flex-start;
@@ -25,7 +25,7 @@
     flex-wrap:wrap;
 }
 
-.plan-card{
+.user-plan-card{
     width:280px;
     background:#fff;
     border-radius:16px;
@@ -37,16 +37,16 @@
     transition:.3s;
 }
 
-.plan-card:hover{
+.user-plan-card:hover{
     transform:translateY(-6px);
     box-shadow:0 18px 35px rgba(0,0,0,.12);
 }
 
-.featured{
+.user-featured{
     border:2px solid #5b4dff;
 }
 
-.recommended-badge{
+.user-recommended-badge{
     position:absolute;
     left:50%;
     top:0;
@@ -61,26 +61,26 @@
     z-index:9999;
 }
 
-.plan-price{
+.user-plan-price{
     font-size:36px;
     font-weight:700;
     color:#222;
     margin-top:8px;
 }
 
-.plan-name{
+.user-plan-name{
     font-size:22px;
     font-weight:600;
     margin-top:6px;
 }
 
-.plan-discount{
+.user-plan-discount{
     font-size:14px;
     color:#777;
     margin:15px 0 18px;
 }
 
-.purchase-btn{
+.user-purchase-btn{
     width:100%;
     height:44px;
     border:none;
@@ -92,16 +92,16 @@
     cursor:pointer;
 }
 
-.purchase-btn:hover{
+.user-purchase-btn:hover{
     background:#4534ff;
 }
 
-.features-list{
+.user-features-list{
     list-style:none;
     margin-top:18px;
 }
 
-.features-list li{
+.user-features-list li{
     display:flex;
     align-items:center;
     margin-bottom:12px;
@@ -109,7 +109,7 @@
     color:#555;
 }
 
-.check-icon{
+.user-check-icon{
     width:20px;
     height:20px;
     min-width:20px;
@@ -124,26 +124,26 @@
     font-weight:bold;
 }
 
-.features-list strong{
+.user-features-list strong{
     color:#222;
 }
 
 @media(max-width:768px){
 
-.purchase-plan-page{
+.user-purchase-plan-page{
     padding:25px 15px;
 }
 
-.purchase-plan-heading{
+.user-purchase-plan-heading{
     text-align:center;
 }
 
-.plans-grid{
+.user-plans-grid{
     flex-direction:column;
     align-items:center;
 }
 
-.plan-card{
+.user-plan-card{
     width:100%;
     max-width:330px;
 }

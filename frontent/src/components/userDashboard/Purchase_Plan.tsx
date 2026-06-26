@@ -43,50 +43,58 @@ const Purchase_Plan = () => {
     console.log(result);
   };
   return (
-    <div className="purchase-plan-page">
-      <h2 className="purchase-plan-heading">Purchase Plan</h2>
-      <div className="plans-grid">
-        {purchase_Plan.map((plan) => (
-          <div key={plan.id} className="plan-card">
-            <div className="plan-price">₹{plan.price}</div>
+    <div className="user-purchase-plan-page">
+  <h2 className="user-purchase-plan-heading">Purchase Plan</h2>
 
-           {plan.is_res === 1 && (
-  <div className="recommended-badge">Recommended</div>
-)}
-            
-            <div className="plan-name">{plan.name}</div>
+  <div className="user-plans-grid">
+    {purchase_Plan.map((plan) => (
+      <div
+        key={plan.id}
+        className={`user-plan-card ${plan.is_res === 1 ? "user-featured" : ""}`}
+      >
+        <div className="user-plan-price">₹{plan.price}</div>
 
-            <div className="plan-discount">{plan.desc}</div>
-
-            <button
-              className="purchase-btn"
-              onClick={() => purchase_Data(plan.id)}
-            >
-              Purchase Plan
-            </button>
-
-            <ul className="features-list">
-              <li>
-                <span className="check-icon">✓</span>
-                <span>
-                  <strong>{plan.credit} Credits</strong>
-                </span>
-              </li>
-
-              <li>
-                <span className="check-icon">✓</span>
-                <span>₹{plan.price} Plan Price</span>
-              </li>
-
-              <li>
-                <span className="check-icon">✓</span>
-                <span>Plan ID : <strong>{plan.id}</strong></span>
-              </li>
-            </ul>
+        {plan.is_res === 1 && (
+          <div className="user-recommended-badge">
+            Recommended
           </div>
-        ))}
+        )}
+
+        <div className="user-plan-name">{plan.name}</div>
+
+        <div className="user-plan-discount">
+          {plan.desc}
+        </div>
+
+        <button
+          className="user-purchase-btn"
+          onClick={() => purchase_Data(plan.id)}
+        >
+          Purchase Plan
+        </button>
+
+        <ul className="user-features-list">
+          <li>
+            <span className="user-check-icon">✓</span>
+            <span><strong>{plan.credit} Credits</strong></span>
+          </li>
+
+          <li>
+            <span className="user-check-icon">✓</span>
+            <span>₹{plan.price} Plan Price</span>
+          </li>
+
+          <li>
+            <span className="user-check-icon">✓</span>
+            <span>
+              Plan ID : <strong>{plan.id}</strong>
+            </span>
+          </li>
+        </ul>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
   );
 };
 
