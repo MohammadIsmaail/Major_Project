@@ -14,4 +14,5 @@ userRouter.get("/Purchased-Plan-User",verifyToken,PurchasedPlanUser)
 // Course
 userRouter.get("/user-view-course",verifyToken,userViewCourse);
 
+
 export default userRouter

@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { viewCourseService } from "../../services/API";
+import {
+  getMasterCourse,
+  viewCourseService,
+} from "../../services/API";
 import "../../styles/View_Course.css";
 
 const View_Course = () => {
   const [courses, setCourses] = useState<any[]>([]);
 
+  // Load All Courses
   const loadCourses = async () => {
     try {
-      const res = await viewCourseService();
-      console.log(res.result)
-      console.log(res)
+      const res = await getMasterCourse();
+
       if (res.success) {
         setCourses(res.result || []);
       } else {
         toast.error(res.message);
       }
     } catch (error) {
+      console.log(error);
       toast.error("Something went wrong");
     }
   };
@@ -25,10 +29,28 @@ const View_Course = () => {
     loadCourses();
   }, []);
 
+  // View Content
+  const handleViewContent = async (course: any) => {
+    try {
+      const res = await viewCourseService();
+
+      if (res.success) {
+        toast.success("1 Credit Deducted Successfully");
+
+        window.open(course.content, "_blank");
+      } else {
+        toast.error(res.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+  };
+
   return (
     <div className="view-course-page">
       <h2 className="view-course-heading">
-        Purchase Course
+        View Course
       </h2>
 
       <div className="view-course-grid">
@@ -38,16 +60,16 @@ const View_Course = () => {
             key={course.id}
           >
             <img
-              src={course.image}
-              alt={course.name}
+              src={course.thumbnail}
+              alt={course.title}
               className="view-course-image"
             />
 
             <div className="view-course-body">
-              <h3>{course.name}</h3>
+              <h3>{course.title}</h3>
 
               <p className="view-course-desc">
-                {course.description}
+                {course.desc}
               </p>
 
               <div className="view-course-info">
@@ -59,16 +81,13 @@ const View_Course = () => {
               </div>
 
               <div className="view-course-type">
-                {course.file_type}
+                {course.type}
               </div>
 
               <button
                 className="view-content-btn"
                 onClick={() =>
-                  window.open(
-                    course.file_url,
-                    "_blank"
-                  )
+                  handleViewContent(course)
                 }
               >
                 📄 View Content
