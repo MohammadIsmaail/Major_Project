@@ -6,13 +6,12 @@ import "../styles/RegisterUser.css"
 import Navbar from "./Navbar";
 import { toast, Bounce } from "react-toastify";
 import { userLoginService } from "../services/API";
-import { storeData } from "../utils/localStorage";
+
 
 
 
 function Login() {
     const navigate = useNavigate()
-
 
     //  Validation Schema
     const schema = yup.object().shape({
@@ -33,7 +32,6 @@ function Login() {
                 "Must contain letters & numbers"
             ),
     });
-
 
     const {
         register,
@@ -60,10 +58,9 @@ function Login() {
                     theme: "light",
                     transition: Bounce,
                 });
-                storeData("token",res.result.token)
+                localStorage.setItem("token", res.result.token);
+                 navigate("/DashboardUser"); // optional
                 reset();
-                navigate("/DashboardUser"); // optional
-               
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",
