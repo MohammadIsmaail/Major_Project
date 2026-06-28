@@ -80,8 +80,9 @@ const View_Course = () => {
               <div className="view-course-type">
                 {course.type}
               </div>
+              
               <div className="view-content-btn" onClick={()=>handleViewContent(course)}>
-                {course.type  `http://localhost:4000/thumbnail_images/${course.content}`}
+                { `http://localhost:4000/thumbnail_images/${course.content}`}
                📄 View Content
               </div>
 
