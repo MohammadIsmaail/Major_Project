@@ -27,22 +27,25 @@ const View_Course = () => {
   }, []);
 
   // View Content
-  const handleViewContent = async (course: any) => {
-    try {
-      const res = await viewCourseService();
+const handleViewContent = async (course: any) => {
+  try {
+    const res = await viewCourseService();
 
-      if (res.success) {
-        toast.success("1 Credit Deducted Successfully");
+    if (res.success) {
+      toast.success("1 Credit Deducted Successfully");
 
-        window.open(course.content, "_blank");
-      } else {
-        toast.error(res.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong");
+      window.open(
+        `http://localhost:3000/course_content_files/${course.content}`,
+        "_blank"
+      );
+    } else {
+      toast.error(res.message);
     }
-  };
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong");
+  }
+};
 
   return (
     <div className="view-course-page">
@@ -80,11 +83,12 @@ const View_Course = () => {
               <div className="view-course-type">
                 {course.type}
               </div>
-              
-              <div className="view-content-btn" onClick={()=>handleViewContent(course)}>
-                { `http://localhost:4000/thumbnail_images/${course.content}`}
-               📄 View Content
-              </div>
+<div
+  className="view-content-btn"
+  onClick={() => handleViewContent(course)}
+>
+  📄 View Content
+</div>
 
               
             </div>
