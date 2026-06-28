@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import "../styles/Navbar.css"
 import React from "react";
 
+
 const Navbar: React.FC = () => {
   return (
+    <>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
         <Link className="navbar-brand fw-bold fs-3" to="/">
@@ -66,6 +68,8 @@ const Navbar: React.FC = () => {
         </div>
       </div>
     </nav>
+ 
+    </>
   );
 };
 

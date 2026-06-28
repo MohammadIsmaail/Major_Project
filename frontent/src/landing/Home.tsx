@@ -1,10 +1,10 @@
-import Navbar from "./Navbar";
+import Landing from "./LandingPage";
 
 const Home = () => {
   return (
     <>
       <div className="row">
-        <Navbar />
+        <Landing />
       </div>
     </>
   );
