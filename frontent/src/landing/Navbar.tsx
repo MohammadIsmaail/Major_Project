@@ -6,9 +6,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
       <div className="container">
-        <a className="navbar-brand fw-bold fs-3" href="/">
+        <Link className="navbar-brand fw-bold fs-3" to="/">
             LMS Portal
-        </a>
+        </Link>
 
         <button
           className="navbar-toggler"
