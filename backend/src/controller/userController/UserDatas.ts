@@ -74,3 +74,5 @@ export const userViewCourse = async (req: any, res: any) => {
     );
   }
 };
+
+
