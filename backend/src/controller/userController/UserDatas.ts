@@ -20,13 +20,14 @@ export const userPurchasePlan = async (req: any, res: any) => {
   }
 };
 
+
 export const PurchasedPlanUser = async (req: any, res: any) => {
   try {
     const user_id = req.user.id;
      const data = await plan  
       .createQueryBuilder("plan")
       .leftJoinAndSelect(masterplan, "mp", "mp.id = plan.plan_id")
-      .where("plan.user_id = :user_id", { user_id })
+      .where("plan.user_id = user_id", { user_id })
       .getRawMany();
       return createResponse(res,true,200,"Plans fetched successfully",data,false,);
   } catch (error: any) {
