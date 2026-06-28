@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "../styles/Navbar.css"
 import React from "react";
 
-
 const Navbar: React.FC = () => {
   return (
     <>
