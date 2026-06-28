@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import {
-  getMasterCourse,
-  viewCourseService,
-} from "../../services/API";
+import {getMasterCourse,viewCourseService,} from "../../services/API";
 import "../../styles/View_Course.css";
 
 const View_Course = () => {
@@ -60,7 +57,7 @@ const View_Course = () => {
             key={course.id}
           >
             <img
-              src={course.thumbnail}
+              src={`http://localhost:3000/thumbnail_images/${course.thumbnail}`}
               alt={course.title}
               className="view-course-image"
             />
@@ -83,15 +80,12 @@ const View_Course = () => {
               <div className="view-course-type">
                 {course.type}
               </div>
+              <div className="view-content-btn" onClick={()=>handleViewContent(course)}>
+                {course.type  `http://localhost:4000/thumbnail_images/${course.content}`}
+               📄 View Content
+              </div>
 
-              <button
-                className="view-content-btn"
-                onClick={() =>
-                  handleViewContent(course)
-                }
-              >
-                📄 View Content
-              </button>
+              
             </div>
           </div>
         ))}

@@ -20,7 +20,6 @@ export const userPurchasePlan = async (req: any, res: any) => {
   }
 };
 
-
 export const PurchasedPlanUser = async (req: any, res: any) => {
   try {
     const user_id = req.user.id;
