@@ -43,13 +43,7 @@ function App() {
           {/* AdminDashboard */}
           <Route path="/adminDashboard" element={<AuthGuardProtected><AdminDashboard /></AuthGuardProtected>} />
           <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
-          <Route path="/ManageUserAdmin" element={<AuthGuardProtected> <AdminDashboard><ManageUserAdmin id={0} name={""} email={""} mobile={""} address={""} credit={""} status={0} profile={""} createdAt={""} onEdit={function (id: number): void {
-            throw new Error("Function not implemented.")
-          } } onDelete={function (id: number): void {
-            throw new Error("Function not implemented.")
-          } } onToggleStatus={function (id: number, status: number): void {
-            throw new Error("Function not implemented.")
-          } } /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/ManageUserAdmin" element={<AuthGuardProtected> <AdminDashboard><ManageUserAdmin/></AdminDashboard></AuthGuardProtected>} />
           <Route path="/CreateMasterPlanAdmin" element={<AuthGuardProtected><AdminDashboard><CreateMasterPlanAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/MasterPlanAdmin" element={<AuthGuardProtected><AdminDashboard><MasterPlanAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/CreateMasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
