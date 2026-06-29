@@ -5,7 +5,7 @@ import Register from "./landing/Register"
 import Login from "./landing/Login"
 import AdminLogin from "./landing/adminLogin"
 import { ToastContainer, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";     
 import AdminDashboard from "./components/adminDashboard/adminDashboard"
 import NavbarUserDashboard from "./components/userDashboard/NavbarUserDashboard"
 import DashBoardAdminShow from "./components/adminDashboard/DashBoardAdminShow"
