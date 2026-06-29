@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = "https://lms-backend-ocvq.onrender.com";
+ 
 
 export const userRegistrationService = async (_data:any) => {
     const res = await axios.post(`${BASE_URL}/user/register`,_data)
