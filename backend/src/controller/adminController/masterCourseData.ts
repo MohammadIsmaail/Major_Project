@@ -6,15 +6,22 @@ import { createResponse } from "../../helper/createResponse";
 export const masterCourseInsertData = async (req: any, res: any) => {
   try {
     const { title, desc, level, rating, duration, type, status } = req.body;
-    const files = req.files as {
-      thumbnail: Express.Multer.File[];
-      content: Express.Multer.File[];
+
+    const files = (req.files || {}) as {
+      thumbnail?: Express.Multer.File[];
+      content?: Express.Multer.File[];
     };
-    console.log("BODY:", req.body);
-    console.log("FILES:", req.files);
+
+    console.log("BODY =>", req.body);
+    console.log("FILES =>", req.files);
+
     const thumbnail = files.thumbnail?.[0]?.path || "";
     const content = files.content?.[0]?.path || "";
-    const isExist = await mastercourse.findOne({ where: { title } });
+
+    const isExist = await mastercourse.findOne({
+      where: { title },
+    });
+
     if (isExist) {
       return createResponse(
         res,
@@ -24,34 +31,41 @@ export const masterCourseInsertData = async (req: any, res: any) => {
         isExist,
         true,
       );
-    } else {
-      const result = await mastercourse.save({
-        title,
-        desc,
-        level,
-        rating,
-        duration,
-        type,
-        status,
-        thumbnail,
-        content,
-      });
-      return createResponse(
-        res,
-        true,
-        200,
-        "Course Add Successfully!",
-        result,
-        false,
-      );
     }
+
+    const result = await mastercourse.save({
+      title,
+      desc,
+      level,
+      rating,
+      duration,
+      type,
+      status: Number(status),
+      thumbnail,
+      content,
+    });
+
+    return createResponse(
+      res,
+      true,
+      200,
+      "Course Added Successfully!",
+      result,
+      false,
+    );
   } catch (error: any) {
-    console.log(error);
+    console.log("==================================");
+    console.log("MASTER COURSE INSERT ERROR");
+    console.log("ERROR =>", error);
+    console.log("MESSAGE =>", error?.message);
+    console.log("STACK =>", error?.stack);
+    console.log("==================================");
+
     return createResponse(
       res,
       false,
       500,
-      error.message || `${error}`,
+      error?.message || "Internal Server Error!",
       [],
       true,
     );
