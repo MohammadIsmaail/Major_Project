@@ -10,6 +10,8 @@ export const masterCourseInsertData = async (req: any, res: any) => {
       thumbnail: Express.Multer.File[];
       content: Express.Multer.File[];
     };
+    console.log("BODY:", req.body);
+    console.log("FILES:", req.files);
     const thumbnail = files.thumbnail?.[0]?.path || "";
     const content = files.content?.[0]?.path || "";
     const isExist = await mastercourse.findOne({ where: { title } });
