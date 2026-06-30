@@ -7,9 +7,6 @@ import Navbar from "./Navbar";
 import { toast, Bounce } from "react-toastify";
 import { userLoginService } from "../services/API";
 
-
-
-
 function Login() {
     const navigate = useNavigate()
 
@@ -59,7 +56,7 @@ function Login() {
                     transition: Bounce,
                 });
                 localStorage.setItem("token", res.result.token);
-                 navigate("/DashboardUser"); // optional
+                navigate("/DashboardUser"); // optional
                 reset();
             } else {
                 toast.error(`${res.message}`, {
@@ -87,26 +84,27 @@ function Login() {
             <div className="container-fluid register-page">
                 <div className="row min-vh-100">
 
-                    {/* Left Section */}
-                    <div className="col-lg-6 left-section">
-                        <div className="content">
-                            <h1>Welcome to our LMS Platform</h1>
+                   {/* Left Section */}
+<div className="col-lg-6 left-section">
+    <div className="content" style={{ maxWidth: "85%", margin: "0 auto" }}>
+        <h1>Welcome to our LMS Platform</h1>
 
-                            <p>
-                                Learn new skills, track your progress and
-                                access educational resources anytime,
-                                anywhere.
-                            </p>
+        <p>
+            Learn new skills, track your progress and
+            access educational resources anytime,
+            anywhere.
+        </p>
 
-                            <img
-                                src="https://cdni.iconscout.com/illustration/premium/thumb/online-learning-4268365-3551762.png"
-                                className="img-fluid"
-                            />
-                        </div>
-                    </div>
+        <img
+            src="https://cdni.iconscout.com/illustration/premium/thumb/online-learning-4268365-3551762.png"
+            className="img-fluid"
+            style={{ maxWidth: "70%" }}
+        />
+    </div>
+</div>
                     {/* Right Section */}
-                    <div className="col-lg-6 d-flex justify-content-center align-items-center p-4">
-                        <div className="register-card w-100">
+                    <div className="col-lg-6 d-flex justify-content-center align-items-start p-2" style={{ paddingTop: "20px" }}>
+                        <div className="register-card w-100" style={{ maxWidth: "420px" }}>
 
                             <h2 className="fw-bold text-center mb-4">
                                 UserLogin Form
@@ -153,9 +151,12 @@ function Login() {
                                     Already have an account?{" "}
                                     <Link
                                         className="login-link"
-                                        to="/register"
-                                    >
+                                        to="/register">
                                         Register
+                                    </Link>
+                                    <br />
+                                    <Link className="" to="/forgot-password">
+                                        Forgot Password?
                                     </Link>
                                 </p>
                             </form>

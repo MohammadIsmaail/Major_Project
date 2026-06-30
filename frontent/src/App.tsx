@@ -19,6 +19,7 @@ import Plan from "./components/userDashboard/Plan"
 import Purchase_Plan from "./components/userDashboard/Purchase_Plan"
 import View_Course from "./components/userDashboard/View_Course"
 import DashboardUser from "./components/userDashboard/DashboardUser"
+import ForgetPassword from "./pages/ForgatePassword/ForgetPassword"
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<AuthGuardPublic><Register /></AuthGuardPublic>} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
 
@@ -50,16 +51,10 @@ function App() {
           <Route path="/MasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><MasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
 
-          <Route
-            path="/CreateMasterCourseAdmin/:id"
-            element={
-              <AuthGuardProtected>
-                <AdminDashboard>
-                  <CreateMasterCourseAdmin />
-                </AdminDashboard>
-              </AuthGuardProtected>
-            }
-          />
+          <Route path="/CreateMasterCourseAdmin/:id" element={<AuthGuardProtected><AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard></AuthGuardProtected>}/>
+       
+          {/* Forget */}
+          <Route path="/forgot-password" element={<ForgetPassword/>} />
         </Routes>
       </BrowserRouter>
 

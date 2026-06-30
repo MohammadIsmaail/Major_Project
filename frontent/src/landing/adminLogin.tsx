@@ -11,7 +11,7 @@ import { storeData } from "../utils/localStorage";
 
 function adminLogin() {
     const navigate = useNavigate()
-    
+
     //  Validation Schema
     const schema = yup.object().shape({
         email: yup
@@ -60,7 +60,7 @@ function adminLogin() {
                 });
                 reset();
                 navigate("/DashBoardAdminShow"); // optional
-                storeData("token",res.result.token)
+                storeData("token", res.result.token)
             } else {
                 toast.error(`${res.message}`, {
                     position: "bottom-right",
@@ -105,8 +105,8 @@ function adminLogin() {
                         </div>
                     </div>
                     {/* Right Section */}
-                    <div className="col-lg-6 d-flex justify-content-center align-items-center p-4">
-                        <div className="register-card w-100">
+                    <div className="col-lg-6 d-flex justify-content-center align-items-start p-2" style={{ paddingTop: "20px" }}>
+                        <div className="register-card w-100" style={{ maxWidth: "420px" }}>
 
                             <h2 className="fw-bold text-center mb-4">
                                 Admin Login Form
@@ -149,7 +149,7 @@ function adminLogin() {
                                 <button className="btn btn-primary w-100 py-2 fw-bold">
                                     Login Now
                                 </button>
-                                
+
                             </form>
 
                         </div>

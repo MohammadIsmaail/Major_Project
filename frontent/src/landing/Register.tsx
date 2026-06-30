@@ -114,8 +114,8 @@ const navigate = useNavigate()
                         </div>
                     </div>
                     {/* Right Section */}
-                    <div className="col-lg-6 d-flex justify-content-center align-items-center p-4">
-                        <div className="register-card w-100">
+                    <div className="col-lg-6 d-flex justify-content-center align-items-start p-4" style={{ paddingTop: "140px" }}>
+                        <div className="register-card w-100" style={{ maxWidth: "420px" }}>
 
                             <h2 className="fw-bold text-center mb-4">
                                 User Registration Form
@@ -189,7 +189,7 @@ const navigate = useNavigate()
                                 <p className="text-center mt-3 mb-0">
                                     Already have an account?{" "}
                                     <Link
-                                        className="login-link"
+                                        className="login-link no-underline"
                                         to="/login"
                                     >
                                         Login
