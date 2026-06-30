@@ -10,8 +10,8 @@ export const masterCourseInsertData = async (req: any, res: any) => {
       thumbnail: Express.Multer.File[];
       content: Express.Multer.File[];
     };
-    const thumbnail = files.thumbnail?.[0]?.filename || "";
-    const content = files?.content?.[0]?.filename || "";
+    const thumbnail = files.thumbnail?.[0]?.path || "";
+    const content = files.content?.[0]?.path || "";
     const isExist = await mastercourse.findOne({ where: { title } });
     if (isExist) {
       return createResponse(
@@ -58,7 +58,7 @@ export const masterCourseInsertData = async (req: any, res: any) => {
 
 export const masterCourseGetData = async (req: any, res: any) => {
   try {
-    const result = await mastercourse.find({order:{created_at:"DESC"}});
+    const result = await mastercourse.find({ order: { created_at: "DESC" } });
     return createResponse(
       res,
       true,
@@ -115,12 +115,19 @@ export const masterCourseSingleData = async (req: any, res: any) => {
     const result = await mastercourse.findOne({ where: { id: Number(id) } });
     if (!result) {
       return createResponse(res, false, 404, "Course Not Found", [], true);
-    }else{
-       return createResponse(res, true,200,"Course Found!",result,false,);
+    } else {
+      return createResponse(res, true, 200, "Course Found!", result, false);
     }
   } catch (err: any) {
     console.log(err);
-    return createResponse(res, false, 500,err.message || "Internal Server Error!", [], true);
+    return createResponse(
+      res,
+      false,
+      500,
+      err.message || "Internal Server Error!",
+      [],
+      true,
+    );
   }
 };
 
@@ -140,14 +147,7 @@ export const masterCourseUpdateData = async (req: any, res: any) => {
     });
 
     if (!course) {
-      return createResponse(
-        res,
-        false,
-        404,
-        "Course Not Found!",
-        [],
-        true
-      );
+      return createResponse(res, false, 404, "Course Not Found!", [], true);
     }
 
     let thumbnail = course.thumbnail;
@@ -159,7 +159,7 @@ export const masterCourseUpdateData = async (req: any, res: any) => {
         const oldThumbnail = path.join(
           process.cwd(),
           "thumbnail_images",
-          course.thumbnail
+          course.thumbnail,
         );
 
         if (fs.existsSync(oldThumbnail)) {
@@ -176,7 +176,7 @@ export const masterCourseUpdateData = async (req: any, res: any) => {
         const oldContent = path.join(
           process.cwd(),
           "course_content_files",
-          course.content
+          course.content,
         );
 
         if (fs.existsSync(oldContent)) {
@@ -199,7 +199,7 @@ export const masterCourseUpdateData = async (req: any, res: any) => {
         status,
         thumbnail,
         content,
-      }
+      },
     );
 
     const updatedCourse = await mastercourse.findOne({
@@ -212,7 +212,7 @@ export const masterCourseUpdateData = async (req: any, res: any) => {
       200,
       "Course Updated Successfully!",
       updatedCourse,
-      false
+      false,
     );
   } catch (err: any) {
     console.log(err);
@@ -223,9 +223,7 @@ export const masterCourseUpdateData = async (req: any, res: any) => {
       500,
       err.message || "Internal Server Error!",
       [],
-      true
+      true,
     );
   }
 };
-
-

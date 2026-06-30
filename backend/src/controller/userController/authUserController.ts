@@ -42,6 +42,7 @@ export const userLogin = async (req: any, res: any) => {
     }
  }catch(err){
       console.log(err);
+      return createResponse(res, false, 404, "Internal Server Error!", [], true);
 
  }
 

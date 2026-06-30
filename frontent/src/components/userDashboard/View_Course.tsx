@@ -35,7 +35,7 @@ const handleViewContent = async (course: any) => {
       toast.success("1 Credit Deducted Successfully");
 
       window.open(
-        `http://localhost:3000/course_content_files/${course.content}`,
+        `${course.content}`,
         "_blank"
       );
     } else {
@@ -60,7 +60,7 @@ const handleViewContent = async (course: any) => {
             key={course.id}
           >
             <img
-              src={`http://localhost:3000/thumbnail_images/${course.thumbnail}`}
+              src={course.thumbnail}
               alt={course.title}
               className="view-course-image"
             />

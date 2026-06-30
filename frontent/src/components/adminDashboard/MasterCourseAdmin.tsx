@@ -20,7 +20,6 @@ interface Course {
   content: string;
 }
 
-const BASE_URL = "http://localhost:3000";
 
 const MasterCourseAdmin = () => {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -119,7 +118,7 @@ const MasterCourseAdmin = () => {
                 <div className="image-wrapper">
 
                   <img
-                    src={`${BASE_URL}/thumbnail_images/${course.thumbnail}`}
+                    src={course.thumbnail}
                     alt={course.title}
                     className="course-img"
                     onError={(e) => {
@@ -208,7 +207,7 @@ const MasterCourseAdmin = () => {
                       </span>
 
                       <a
-                        href={`${BASE_URL}/course_content_files/${course.content}`}
+                        href={course.content}
                         target="_blank"
                         rel="noreferrer"
                         className="value text-decoration-none text-primary"
