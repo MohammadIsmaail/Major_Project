@@ -39,6 +39,18 @@ const Port = process.env.PORT || 4000;
 app.use("/user",userRouter)
 app.use("/admin",adminRouter)
 
+
+// Global error handler
+app.use((err: any, req: any, res: any, next: any) => {
+  console.error("GLOBAL ERROR =>", err.message);
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
+});
+
+
 app.listen(Port,()=>{
     console.log(`server is running on ${Port}`);
     
