@@ -51,7 +51,7 @@ export const masterCourseInsertData = async (req: any, res: any) => {
       res,
       false,
       500,
-      error.message || "Internal Server Error",
+      error.message || `${error}`,
       [],
       true,
     );
