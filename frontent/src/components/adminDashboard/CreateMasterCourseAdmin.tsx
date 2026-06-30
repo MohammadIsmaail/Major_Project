@@ -105,10 +105,8 @@ const CreateMasterCourseAdmin = () => {
       if (id) {
         res = await updateMasterCourse(id, formData);
       } else {
-        alert("onSubmit Called");
-  console.log("onSubmit Called");
-        console.log("chal raha hai")
         res = await createMasterCourse(formData);
+        alert(res.message)
       }
 
       if (res.success) {
