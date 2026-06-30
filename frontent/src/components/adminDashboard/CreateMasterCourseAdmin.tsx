@@ -106,9 +106,7 @@ const CreateMasterCourseAdmin = () => {
         res = await updateMasterCourse(id, formData);
       } else {
         res = await createMasterCourse(formData);
-        alert(res.message)
       }
-
       if (res.success) {
         toast.success(res.message, {
           position: "bottom-right",
