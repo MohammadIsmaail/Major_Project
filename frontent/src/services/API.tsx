@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://lms-backend-ocvq.onrender.com";
+
  
 
 export const userRegistrationService = async (_data:any) => {
