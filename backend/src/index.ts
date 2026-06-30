@@ -6,6 +6,7 @@ import { AppDataSource } from './DBconfig/dbconfig'
 import userRouter from './router/user/userrouter'
 import adminRouter from './router/admin/adminrouter'
 const app = express()
+app.set("trust proxy", 1);
 import path from "path"
 
 app.use(express.json())

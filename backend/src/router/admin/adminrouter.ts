@@ -38,6 +38,15 @@ adminRouter.delete("/delete-master-plan/:id", masterPlanDeleteData);
 adminRouter.get("/get-single-master-plan/:id", getSingleMasterPlan);
 adminRouter.put("/update-master-plan/:id", updateMasterPlanData);
 
+
+
+
+
+
+
+
+
+
 //  Master Course  masterCourseGetData
 adminRouter.post(
   "/create-master-course",
@@ -48,27 +57,27 @@ adminRouter.post(
   masterCourseInsertData,
 );
 
+
+
+
+
+
+
+
+
+
+
 adminRouter.get("/get-master-course", masterCourseGetData);
 adminRouter.delete("/delete-master-course/:id", masterCourseDeleteData);
 adminRouter.get("/single-master-course/:id", masterCourseSingleData);
-
-
-
-
-
-adminRouter.post(
-  "/create-master-course",
-  (req, res) => {
-    console.log("ROUTE WORKING");
-    res.json({
-      success: true,
-      message: "Route Working",
-    });
-  }
+adminRouter.put(
+  "/update-master-course/:id",
+  thumbnail_course_contents.fields([
+    { name: "thumbnail", maxCount: 1 },
+    { name: "content", maxCount: 1 },
+  ]),
+  masterCourseUpdateData,
 );
-
-
-
 
 
 adminRouter.get("/admin-dashboard-stats", getDashboardStats);

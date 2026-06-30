@@ -6,15 +6,10 @@ import { createResponse } from "../../helper/createResponse";
 export const masterCourseInsertData = async (req: any, res: any) => {
   try {
     const { title, desc, level, rating, duration, type, status } = req.body;
-
     const files = (req.files || {}) as {
       thumbnail?: Express.Multer.File[];
       content?: Express.Multer.File[];
     };
-
-    console.log("BODY =>", req.body);
-    console.log("FILES =>", req.files);
-
     const thumbnail = files.thumbnail?.[0]?.path || "";
     const content = files.content?.[0]?.path || "";
 
@@ -23,16 +18,8 @@ export const masterCourseInsertData = async (req: any, res: any) => {
     });
 
     if (isExist) {
-      return createResponse(
-        res,
-        false,
-        400,
-        "Course Already Exist!",
-        isExist,
-        true,
-      );
+      return createResponse(res,false,400,"Course Already Exist!",isExist,true,);
     }
-
     const result = await mastercourse.save({
       title,
       desc,
@@ -44,31 +31,9 @@ export const masterCourseInsertData = async (req: any, res: any) => {
       thumbnail,
       content,
     });
-
-    return createResponse(
-      res,
-      true,
-      200,
-      "Course Added Successfully!",
-      result,
-      false,
-    );
+    return createResponse(res,true,200,"Course Added Successfully!",result, false,);
   } catch (error: any) {
-    console.log("==================================");
-    console.log("MASTER COURSE INSERT ERROR");
-    console.log("ERROR =>", error);
-    console.log("MESSAGE =>", error?.message);
-    console.log("STACK =>", error?.stack);
-    console.log("==================================");
-
-    return createResponse(
-      res,
-      false,
-      500,
-      error?.message || "Internal Server Error!",
-      [],
-      true,
-    );
+    return createResponse(res,false,500,error?.message || "Internal Server Error!",[],true,);
   }
 };
 
