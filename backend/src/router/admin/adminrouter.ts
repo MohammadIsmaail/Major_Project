@@ -51,14 +51,24 @@ adminRouter.post(
 adminRouter.get("/get-master-course", masterCourseGetData);
 adminRouter.delete("/delete-master-course/:id", masterCourseDeleteData);
 adminRouter.get("/single-master-course/:id", masterCourseSingleData);
-adminRouter.put(
-  "/update-master-course/:id",
-  thumbnail_course_contents.fields([
-    { name: "thumbnail", maxCount: 1 },
-    { name: "content", maxCount: 1 },
-  ]),
-  masterCourseUpdateData,
+
+
+
+
+
+adminRouter.post(
+  "/create-master-course",
+  (req, res) => {
+    console.log("ROUTE WORKING");
+    res.json({
+      success: true,
+      message: "Route Working",
+    });
+  }
 );
+
+
+
 
 
 adminRouter.get("/admin-dashboard-stats", getDashboardStats);
