@@ -47,3 +47,7 @@ export const userLogin = async (req: any, res: any) => {
  }
 
 };
+
+export const forgetPassword = (req: any, res: any)=>{
+  res.send("okkk")
+}
