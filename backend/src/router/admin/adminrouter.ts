@@ -41,15 +41,11 @@ adminRouter.put("/update-master-plan/:id", updateMasterPlanData);
 //  Master Course  masterCourseGetData
 adminRouter.post(
   "/create-master-course",
-  (req, res, next) => {
-    console.log("Route Hit");
-    next();
-  },
   thumbnail_course_contents.fields([
     { name: "thumbnail", maxCount: 1 },
     { name: "content", maxCount: 1 },
   ]),
-  masterCourseInsertData
+  masterCourseInsertData,
 );
 
 adminRouter.get("/get-master-course", masterCourseGetData);
