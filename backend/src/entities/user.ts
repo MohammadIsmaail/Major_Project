@@ -11,8 +11,8 @@ export class user extends BaseEntity{
     @Column({  name: "email",type: "varchar", length: 255, unique:true})
     email: any
 
-    @Column({  name: "password",type: "varchar", length: 255,nullable:true})
-    password: any
+    @Column({ name: "password", type: "varchar", length: 255, nullable: true })
+    password!: string;
 
     @Column({  name: "mobile",type: "varchar", length: 255, nullable: true})
     mobile: any

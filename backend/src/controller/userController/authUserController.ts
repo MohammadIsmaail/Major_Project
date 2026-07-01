@@ -6,63 +6,215 @@ import nodemailer from "nodemailer";
 import { generatePassword } from "../../helper/ForgetPassword";
 
 export const userRegister = async (req: any, res: any) => {
- 
- try{
-     const { name, email, password, mobile } = req.body;
+  try {
+    const { name, email, password, mobile } = req.body;
     const isExist = await user.findOne({ where: { email: email } });
     if (isExist) {
       return createResponse(res, false, 400, "User Already Exist!", [], true);
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
-      const result = await user.save({name,email,mobile,password:hashPassword})
-      return createResponse(res, true, 201, "User Register Successfully!", result, false);
+      const result = await user.save({
+        name,
+        email,
+        mobile,
+        password: hashPassword,
+      });
+      return createResponse(
+        res,
+        true,
+        201,
+        "User Register Successfully!",
+        result,
+        false,
+      );
     }
- }catch(err){
-  return createResponse(res,false,500,"Internal Server Error!",[],true)
- }
-
+  } catch (err) {
+    return createResponse(res, false, 500, "Internal Server Error!", [], true);
+  }
 };
 export const userLogin = async (req: any, res: any) => {
- 
- try{
-     const {  email, password } = req.body;
+  try {
+    const { email, password } = req.body;
     const isExist = await user.findOne({ where: { email } });
     if (!isExist) {
       return createResponse(res, false, 404, "User Not Found!", [], true);
     } else {
-      const isMatched = await bcrypt.compare(password,isExist.password)
-      if(!isMatched){
-        return createResponse(res, false, 404, "Please Enter Valid Password!", [], true);
-      }
-      else{
-        const payload = {email:isExist.email,id:isExist.id}
-        const token = generateToken(payload)
-        return createResponse(res, true, 200, "Login Successful", { ...isExist,token }, false);
+      const isMatched = await bcrypt.compare(password, isExist.password);
+      if (!isMatched) {
+        return createResponse(
+          res,
+          false,
+          404,
+          "Please Enter Valid Password!",
+          [],
+          true,
+        );
+      } else {
+        const payload = { email: isExist.email, id: isExist.id };
+        const token = generateToken(payload);
+        return createResponse(
+          res,
+          true,
+          200,
+          "Login Successful",
+          { ...isExist, token },
+          false,
+        );
       }
     }
- }catch(err){
-      console.log(err);
-      return createResponse(res, false, 404, "Internal Server Error!", [], true);
-
- }
-
+  } catch (err) {
+    console.log(err);
+    return createResponse(res, false, 404, "Internal Server Error!", [], true);
+  }
 };
 
 export const forgetPassword = async (req: any, res: any) => {
-    const { email } = req.body;
-    try {
-        let isExist = await user.findOne({ where: { email } });
-        if (!isExist) {
-            return createResponse(res, false, 404, "User Not Found!", [], true);
+  const { email } = req.body;
+  try {
+    let isExist = await user.findOne({ where: { email } });
+    if (!isExist) {
+      return createResponse(res, false, 404, "User Not Found!", [], true);
+    } else {
+      const newPassword = generatePassword();
+      //
+      let sender = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "mohammadismaail687@gmail.com",
+          pass: "gwvv qdff cttj egct",
+        },
+      });
+
+      let mail = {
+        from: "mohammadismaail687@gmail.com",
+        to: `${email}`,  
+        //  isExist.email
+        subject: "Sending Email using Node.js",
+        // text: "That was easy!",
+      
+         html: `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body style="margin:0;padding:0;background:#f4f6f9;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f9;padding:30px 0;">
+<tr>
+<td align="center">
+
+<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,0.1);">
+
+  <!-- Header -->
+  <tr>
+    <td align="center"
+      style="background:linear-gradient(135deg,#4f46e5,#7c3aed);padding:35px;">
+      <h1 style="margin:0;color:#ffffff;font-size:28px;">
+        🔐 Password Reset
+      </h1>
+      <p style="margin-top:10px;color:#e5e7eb;font-size:15px;">
+        LMS Platform
+      </p>
+    </td>
+  </tr>
+
+  <!-- Body -->
+  <tr>
+    <td style="padding:40px;">
+
+      <h2 style="margin-top:0;color:#333;">
+        Hello ${isExist.name || "User"},
+      </h2>
+
+      <p style="color:#555;font-size:16px;line-height:1.8;">
+        We received a request to reset your password.
+        Your new temporary password is shown below.
+      </p>
+
+      <div
+        style="margin:30px 0;background:#eef2ff;border:2px dashed #4f46e5;
+        border-radius:10px;padding:20px;text-align:center;">
+
+        <span
+          style="font-size:28px;
+          font-weight:bold;
+          color:#4f46e5;
+          letter-spacing:3px;">
+          ${newPassword}
+        </span>
+
+      </div>
+
+      <p style="color:#555;font-size:15px;line-height:1.8;">
+        Please login using this password and change it immediately from your
+        profile settings to keep your account secure.
+      </p>
+
+      <table cellpadding="0" cellspacing="0" align="center" style="margin:35px auto;">
+        <tr>
+          <td
+            style="background:#4f46e5;padding:14px 35px;border-radius:8px;">
+            <a
+              href="http://localhost:5173/login"
+              style="color:#ffffff;text-decoration:none;font-size:16px;font-weight:bold;">
+              Login Now
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <hr style="border:none;border-top:1px solid #eeeeee;margin:35px 0;">
+
+      <p style="font-size:14px;color:#777;line-height:1.7;">
+        <strong>Didn't request this?</strong><br>
+        If you didn't request a password reset, please contact our support
+        team immediately.
+      </p>
+
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td
+      align="center"
+      style="background:#f8fafc;padding:20px;color:#888;font-size:13px;">
+
+      © ${new Date().getFullYear()} LMS Platform<br>
+      All Rights Reserved.
+
+    </td>
+  </tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+     
+`,
+      };
+
+      sender.sendMail(mail, function (error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent successfully: " + info.response);
         }
-        const newPassword = generatePassword();
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-        const password1 = await user.save({ ...isExist, password: hashedPassword });
-
-        return createResponse(res, true, 200, "Password reset link sent to your email!", { password1, newPassword }, false);
-    } catch (err: any) {
-        console.log(err);
-        return createResponse(res, false, 500, `Internal Server Error! || ${err.message}`, [], true);
+      });
+      //
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      
+       const password1 = await user.update({ email: isExist.email }, { password: hashedPassword });
+      return createResponse(res,true,200,"Password reset link sent to your email!",{ password1, newPassword },false,);
     }
-}
+  } catch (err: any) {
+    console.log(err);
+    return createResponse(res,false,500,`Internal Server Error! || ${err.message}`,[],true,);
+  }
+};
