@@ -80,16 +80,16 @@ export const forgetPassword = async (req: any, res: any) => {
       let sender = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "mohammadismaail687@gmail.com",
-          pass: "gwvv qdff cttj egct",
+          user: process.env.Email,
+          pass: process.env.Email_Password,
         },
       });
 
       let mail = {
-        from: "mohammadismaail687@gmail.com",
+        from: process.env.Email,
         to: `${email}`,  
         //  isExist.email
-        subject: "Sending Email using Node.js",
+        subject: "Password Reset Successful - LMS Platform",
         // text: "That was easy!",
       
          html: `
@@ -197,10 +197,10 @@ export const forgetPassword = async (req: any, res: any) => {
 </body>
 </html>
      
-`,
+        `,
       };
 
-      sender.sendMail(mail, function (error, info) {
+      await sender.sendMail(mail, function (error, info) {
         if (error) {
           console.log(error);
         } else {
