@@ -3,7 +3,7 @@ import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 
 dotenv.config();
-
+const isDev = process.env.NODE_ENV !== "production";
 export const AppDataSource = new DataSource({
   type: "postgres",
   url: process.env.DATABASE_URL,
@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
     rejectUnauthorized: false,
   },
   synchronize: true,
-  entities: ["dist/entities/**/*.js"],
-  migrations: ["dist/migration/**/*.js"],
-  subscribers: ["dist/subscribers/**/*.js"],
+  entities: [isDev ? "src/entities/**/*.ts" : "dist/entities/**/*.js"],
+  migrations: [isDev ? "src/migration/**/*.ts" : "dist/migration/**/*.js"],
+  subscribers: [isDev ? "src/subscribers/**/*.ts" : "dist/subscribers/**/*.js"],
 });
