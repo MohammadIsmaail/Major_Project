@@ -37,7 +37,7 @@ function ForgotPassword() {
     const onSubmit = async (data: any) => {
         setLoading(true);
         try {
-            const res = await userForgotPasswordService(data);
+            const res = await userForgotPasswordService({email:data.email});
                console.log(res.success)
             if (res.success) {
                 toast.success(
