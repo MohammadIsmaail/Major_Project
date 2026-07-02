@@ -36,6 +36,7 @@ export const userRegister = async (req: any, res: any) => {
     return createResponse(res, false, 500, "Internal Server Error!", [], true);
   }
 };
+
 export const userLogin = async (req: any, res: any) => {
   try {
     const { email, password } = req.body;
