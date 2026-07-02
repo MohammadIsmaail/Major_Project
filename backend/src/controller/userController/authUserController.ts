@@ -147,7 +147,7 @@ export const forgetPassword = async (req: any, res: any) => {
       // 👇 Resend se email bhejo
       try {
         const { data, error } = await resend.emails.send({
-          from: `LMS Platform <${process.env.Email}>`,
+          from: "onboarding@resend.dev", // 👈 hardcoded, env variable pe depend nahi,
           to: `${isExist.email}`,
           subject: "Password Reset Successful - LMS Platform",
           html: emailHtml,
