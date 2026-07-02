@@ -76,7 +76,7 @@ export const forgetPassword = async (req: any, res: any) => {
       return createResponse(res, false, 404, "User Not Found!", [], true);
     } else {
       const newPassword = generatePassword();
-      //
+
       let sender = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -87,11 +87,8 @@ export const forgetPassword = async (req: any, res: any) => {
 
       let mail = {
         from: process.env.Email,
-        to: `${email}`,  
-        //  isExist.email
+        to: `${email}`,
         subject: "Password Reset Successful - LMS Platform",
-        // text: "That was easy!",
-      
          html: `
 <!DOCTYPE html>
 <html lang="en">
@@ -200,21 +197,22 @@ export const forgetPassword = async (req: any, res: any) => {
         `,
       };
 
-      await sender.sendMail(mail, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email sent successfully: " + info.response);
-        }
-      });
-      //
+      // 👇 sirf await, callback nahi
+      try {
+        const info = await sender.sendMail(mail);
+        console.log("Email sent successfully: " + info.response);
+      } catch (mailError: any) {
+        console.log("Email sending failed:", mailError);
+        return createResponse(res, false, 500, "Failed to send email. Please try again.", [], true);
+      }
+
       const hashedPassword = await bcrypt.hash(newPassword, 10);
-      
-       const password1 = await user.update({ email: isExist.email }, { password: hashedPassword });
-      return createResponse(res,true,200,"Password reset link sent to your email!",{ password1, newPassword },false,);
+      const password1 = await user.update({ email: isExist.email }, { password: hashedPassword });
+
+      return createResponse(res, true, 200, "Password reset link sent to your email!", { password1, newPassword }, false);
     }
   } catch (err: any) {
     console.log(err);
-    return createResponse(res,false,500,`Internal Server Error! || ${err.message}`,[],true,);
+    return createResponse(res, false, 500, `Internal Server Error! || ${err.message}`, [], true);
   }
 };

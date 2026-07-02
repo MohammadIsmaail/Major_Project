@@ -128,6 +128,6 @@ export const viewCourseService = async () => {
 
 
 export const userForgotPasswordService = async (data: any) => {
-  const res = await axios.put(`${BASE_URL}/admin/update-master-course`,data);
+  const res = await axios.post(`${BASE_URL}/user/forget-passwords`,data);
   return res.data;
 };

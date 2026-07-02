@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast, Bounce } from "react-toastify";
 import "../../styles/RegisterUser.css";
 import Navbar from "../../landing/Navbar";
@@ -18,26 +18,27 @@ const schema = yup.object().shape({
         .max(40, "Too long"),
 });
 
-type ForgotPasswordFormData = yup.InferType<typeof schema>;
+
 
 function ForgotPassword() {
     const [loading, setLoading] = useState(false);
     const [emailSent, setEmailSent] = useState(false);
+    const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm<ForgotPasswordFormData>({
+    } = useForm({
         resolver: yupResolver(schema),
     });
 
-    const onSubmit = async (data: ForgotPasswordFormData) => {
+    const onSubmit = async (data: any) => {
         setLoading(true);
         try {
             const res = await userForgotPasswordService(data);
-
+               console.log(res.success)
             if (res.success) {
                 toast.success(
                     res.message || "Password sent to your email!",
@@ -53,6 +54,7 @@ function ForgotPassword() {
                     }
                 );
                 setEmailSent(true);
+                navigate("/login");
                 reset();
             } else {
                 toast.error(res.message || "Something went wrong!", {
@@ -76,11 +78,8 @@ function ForgotPassword() {
             setLoading(false);
         }
     };
-
     return (
-        <>
-            <Navbar />
-
+        <>            <Navbar />
             <div className="container-fluid register-page">
                 <div className="row min-vh-70">
 
