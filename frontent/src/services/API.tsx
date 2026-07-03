@@ -143,3 +143,31 @@ export const getUserDashboardService = async () => {
   });
   return res.data;
 };
+
+
+
+
+// User Management (Admin)
+export const getAllUsersService = async () => {
+  const token = localStorage.getItem("token"); // 👈 tumhare project me admin/user same "token" key use ho rahi hai, isliye ye rakha
+  const res = await axios.get(`${BASE_URL}/admin/get-all-users`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+export const deleteUserService = async (id: any) => {
+  const token = localStorage.getItem("token");
+  const res = await axios.delete(`${BASE_URL}/admin/delete-user/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
+
+export const toggleUserStatusService = async (id: any) => {
+  const token = localStorage.getItem("token");
+  const res = await axios.patch(`${BASE_URL}/admin/toggle-user-status/${id}`, {}, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
