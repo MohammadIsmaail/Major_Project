@@ -149,7 +149,7 @@ const DashboardUser = () => {
         <p style={{ color: "var(--muted)", marginBottom: 16 }}>
           {availableCoursesCount} courses available. Use your credits to unlock and start learning.
         </p>
-        <button className="continue-btn" style={{ maxWidth: 220 }} onClick={() => navigate("/View_Courses")}>
+        <button className="continue-btn" style={{ maxWidth: 220 }} onClick={() => navigate("/View_Course")}>
           Browse Courses <FaArrowRight />
         </button>
       </div>
