@@ -5,6 +5,8 @@ import { admin } from "../../entities/admin";
 
 import { masterplan } from "../../entities/masterplan";
 import { mastercourse } from "../../entities/mastercourse";
+import { user } from "../../entities/user";
+
 
 
 export const adminRegister = async (req: any, res: any) => {
@@ -24,7 +26,6 @@ export const adminRegister = async (req: any, res: any) => {
  }
 
 };
-
 
 export const adminLogin = async (req: any, res: any) => {
  
@@ -50,7 +51,6 @@ export const adminLogin = async (req: any, res: any) => {
  }
 
 };
-
 
 export const getDashboardStats = async (req: any, res: any) => {
   try {
@@ -105,5 +105,39 @@ export const getDashboardStats = async (req: any, res: any) => {
       [],
       true
     );
+  }
+};
+
+
+
+export const adminGetAllUsers = async (req: any, res: any) => {
+  try {
+    const users = await user.find({ order: { id: "DESC" } });
+    return createResponse(res, true, 200, "Users fetched successfully", users, false);
+  } catch (error: any) {
+    return createResponse(res, false, 500, error.message || "Internal Server Error", [], true);
+  }
+};
+
+export const adminDeleteUser = async (req: any, res: any) => {
+  try {
+    const { id } = req.params;
+    await user.delete({ id });
+    return createResponse(res, true, 200, "User deleted successfully", [], false);
+  } catch (error: any) {
+    return createResponse(res, false, 500, error.message || "Internal Server Error", [], true);
+  }
+};
+
+export const adminToggleUserStatus = async (req: any, res: any) => {
+  try {
+    const { id } = req.params;
+    const existingUser = await user.findOne({ where: { id } });
+    if (!existingUser) {
+      return createResponse(res, false, 404, "User not found", [], true);
+    }
+    return createResponse(res, true, 200, "User status updated", [], false);
+  } catch (error: any) {
+    return createResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }
 };

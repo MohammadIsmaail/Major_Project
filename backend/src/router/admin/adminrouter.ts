@@ -1,7 +1,10 @@
 import express from "express";
 import {
+  adminDeleteUser,
+  adminGetAllUsers,
   adminLogin,
   adminRegister,
+  adminToggleUserStatus,
   getDashboardStats,
 } from "../../controller/adminController/authAdminController";
 import {
@@ -25,6 +28,7 @@ import {
   masterCourseUpdateData,
 } from "../../controller/adminController/masterCourseData";
 import { thumbnail_course_contents } from "../../helper/ImageFileUpload";
+import { verifyToken } from "../../middleware/authMiddleware";
 const adminRouter = express.Router();
 
 adminRouter.post("/register", AdminRegRatelimit, adminRegister);
@@ -39,12 +43,10 @@ adminRouter.get("/get-single-master-plan/:id", getSingleMasterPlan);
 adminRouter.put("/update-master-plan/:id", updateMasterPlanData);
 
 
-
-
-
-
-
-
+// UserAdmin  Handler
+adminRouter.get("/get-all-users", verifyToken, adminGetAllUsers);
+adminRouter.delete("/delete-user/:id", verifyToken, adminDeleteUser);
+adminRouter.patch("/toggle-user-status/:id", verifyToken, adminToggleUserStatus);
 
 
 //  Master Course  masterCourseGetData
