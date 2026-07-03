@@ -122,9 +122,9 @@ const DashboardUser = () => {
         {purchasedPlans.length === 0 ? (
           <div className="empty-state">
             <p>You haven't purchased any plan yet.</p>
-            <button className="continue-btn" style={{ maxWidth: 220, margin: "16px auto 0" }} onClick={() => navigate("/purchase-plan")}>
-              Browse Plans <FaArrowRight />
-            </button>
+            <button className="continue-btn cta-btn" onClick={() => navigate("/purchase-plan")}>
+  Browse Plans <FaArrowRight />
+</button>
           </div>
         ) : (
           <div className="courses-grid">

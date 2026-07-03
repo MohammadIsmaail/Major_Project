@@ -364,6 +364,11 @@
   animation: spin 0.8s linear infinite;
 }
 
+.cta-btn {
+  max-width: 220px;
+  margin: 16px auto 0;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
