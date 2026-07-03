@@ -23,19 +23,21 @@ const ManageUserAdmin = () => {
   const [loading, setLoading] = useState(true);
   const [actionLoadingId, setActionLoadingId] = useState<number | null>(null);
 
-  const fetchUsers = async () => {
-    setLoading(true);
-    try {
-      const res = await getAllUsersService();
-      setUsers(res.result || []);
-    } catch (err) {
-      console.error("Failed to load users:", err);
-      toast.error("Failed to load users.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const fetchUsers = async () => {
+  setLoading(true);
+  try {
+    const res = await getAllUsersService();
+    console.log("Users API response:", res); // 👈 ye line temporarily add karo, console me dekhna
+    const userList = Array.isArray(res.result) ? res.result : Array.isArray(res.result?.data) ? res.result.data : [];
+    setUsers(userList);
+  } catch (err) {
+    console.error("Failed to load users:", err);
+    toast.error("Failed to load users.");
+    setUsers([]); // 👈 safety
+  } finally {
+    setLoading(false);
+  }
+};
   useEffect(() => {
     fetchUsers();
   }, []);
