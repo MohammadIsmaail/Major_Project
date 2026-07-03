@@ -152,7 +152,7 @@ const DashboardUser = () => {
         <button className="continue-btn" style={{ maxWidth: 220 }} onClick={() => navigate("/View_Course")}>
           Browse Courses <FaArrowRight />
         </button>
-      </div>
+      </div>    
     </div>
   );
 };
