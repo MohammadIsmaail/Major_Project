@@ -19,7 +19,7 @@
 
 .user-plans-grid{
     display:flex;
-    justify-content:center;
+    justify-content:start;
     align-items:flex-start;
     gap:25px;
     flex-wrap:wrap;
