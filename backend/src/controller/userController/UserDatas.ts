@@ -75,3 +75,28 @@ export const userViewCourse = async (req: any, res: any) => {
 };
 
 
+export const getUserDashboard = async (req: any, res: any) => {
+  try {
+    const user_id = req.user.id;
+
+    const userData = await user.findOne({ where: { id: user_id } });
+
+    const purchasedPlans = await plan
+      .createQueryBuilder("plan")
+      .leftJoinAndSelect(masterplan, "mp", "mp.id = plan.plan_id")
+      .where("plan.user_id = :user_id", { user_id }) // 👈 colon fix yahan bhi
+      .getRawMany();
+
+    const availableCoursesCount = await mastercourse.count();
+
+    return createResponse(res, true, 200, "Dashboard data fetched", {
+      userName: userData?.name || "User",
+      credit: userData?.credit || 0,
+      purchasedPlans,
+      availableCoursesCount,
+    }, false);
+  } catch (err: any) {
+    return createResponse(res, false, 500, `Internal Server Error! || ${err.message}`, [], true);
+  }
+};
+

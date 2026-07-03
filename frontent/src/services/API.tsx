@@ -131,3 +131,15 @@ export const userForgotPasswordService = async (data: any) => {
   const res = await axios.post(`${BASE_URL}/user/forget-passwords`,data);
   return res.data;
 };
+
+
+// llllllllllllllllllllllllllll
+
+
+export const getUserDashboardService = async () => {
+  const token = localStorage.getItem("token");
+  const res = await axios.get(`${BASE_URL}/user/get-user-dashboard`, { // 👈 fix
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res.data;
+};
