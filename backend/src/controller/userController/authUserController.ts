@@ -8,7 +8,6 @@ import { generatePassword } from "../../helper/ForgetPassword";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-
 export const userRegister = async (req: any, res: any) => {
   try {
     const { name, email, password, mobile } = req.body;
@@ -156,22 +155,53 @@ export const forgetPassword = async (req: any, res: any) => {
 
         if (error) {
           console.log("Email sending failed:", error);
-          return createResponse(res, false, 500, "Failed to send email. Please try again.", [], true);
+          return createResponse(
+            res,
+            false,
+            500,
+            "Failed to send email. Please try again.",
+            [],
+            true,
+          );
         }
 
         console.log("Email sent successfully:", data);
       } catch (mailError: any) {
         console.log("Email sending failed:", mailError);
-        return createResponse(res, false, 500, "Failed to send email. Please try again.", [], true);
+        return createResponse(
+          res,
+          false,
+          500,
+          "Failed to send email. Please try again.",
+          [],
+          true,
+        );
       }
 
       const hashedPassword = await bcrypt.hash(newPassword, 10);
-      const password1 = await user.update({ email: isExist.email }, { password: hashedPassword });
+      const password1 = await user.update(
+        { email: isExist.email },
+        { password: hashedPassword },
+      );
 
-      return createResponse(res, true, 200, "Password reset link sent to your email!", { password1, newPassword }, false);
+      return createResponse(
+        res,
+        true,
+        200,
+        "Password reset link sent to your email!",
+        { password1, newPassword },
+        false,
+      );
     }
   } catch (err: any) {
     console.log(err);
-    return createResponse(res, false, 500, `Internal Server Error! || ${err.message}`, [], true);
+    return createResponse(
+      res,
+      false,
+      500,
+      `Internal Server Error! || ${err.message}`,
+      [],
+      true,
+    );
   }
 };
