@@ -113,12 +113,12 @@ export const getDashboardStats = async (req: any, res: any) => {
 export const adminGetAllUsers = async (req: any, res: any) => {
   try {
     const users = await user.find({ order: { id: "DESC" } });
-    return createResponse(res, true, 200, "Users fetched successfully", users, false);
+    const mapped = users.map((u) => ({ ...u, isActive: u.status === 1 }));
+    return createResponse(res, true, 200, "Users fetched successfully", mapped, false);
   } catch (error: any) {
     return createResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }
 };
-
 export const adminDeleteUser = async (req: any, res: any) => {
   try {
     const { id } = req.params;
@@ -128,7 +128,6 @@ export const adminDeleteUser = async (req: any, res: any) => {
     return createResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }
 };
-
 export const adminToggleUserStatus = async (req: any, res: any) => {
   try {
     const { id } = req.params;
@@ -136,7 +135,9 @@ export const adminToggleUserStatus = async (req: any, res: any) => {
     if (!existingUser) {
       return createResponse(res, false, 404, "User not found", [], true);
     }
-    return createResponse(res, true, 200, "User status updated", [], false);
+    const newStatus = existingUser.status === 1 ? 0 : 1;
+    await user.update({ id }, { status: newStatus } as any);
+    return createResponse(res, true, 200, "User status updated", { isActive: newStatus === 1 }, false);
   } catch (error: any) {
     return createResponse(res, false, 500, error.message || "Internal Server Error", [], true);
   }
