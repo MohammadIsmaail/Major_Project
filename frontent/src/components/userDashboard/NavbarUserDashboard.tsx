@@ -1,117 +1,151 @@
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { IoClose } from "react-icons/io5";
 import { RiFileList3Line, RiLogoutCircleRLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
-import "../../styles/UserAdminNavUnLine.css"
-import { FiLogOut } from "react-icons/fi";
 import { MdWindow } from "react-icons/md";
+import "../../styles/UserAdminNavUnLine.css";
 
 const NavbarUserDashboard = ({ children }: any) => {
     const data = [
         {
             url: "/DashboardUser",
             icon: MdWindow,
-            name: "Dashboard"
+            name: "Dashboard  ",
         },
         {
             url: "/Purchase_plan",
             icon: FaUsers,
-            name: "Purchase Plan"
+            name: "Purchase Plan",
         },
         {
             url: "/Plan",
             icon: FaUsers,
-            name: "My Plan"
+            name: "My Plan",
         },
         {
             url: "/View_Course",
             icon: RiFileList3Line,
-            name: "View Course"
+            name: "View Course",
         },
-        {
-            url: "/",
-            icon: FiLogOut,
-            name: "Logout"
-        }
-    ]
+    ];
+
     const [open, setOpen] = useState(true);
-    const navigate = useNavigate()
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const handleHamburger = () => {
-        setOpen(!open)
-    }
+        setOpen(!open);
+    };
+
     const logout = () => {
         localStorage.removeItem("token");
-        navigate("/")
-    }
+        navigate("/");
+    };
+
     return (
-        <>
-            <div className="row vh-100" style={{ margin: "0px", padding: "0px", height: "20px" }}>
-                <div className={`${open ? "col-sm-2 bg-dark" : "col-sm-1 bg-dark"} `}>
-                    <div className="row">
-                        <div className="d-flex align-items-center gap-2 mt-3">
-                            <img
-                                src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                                alt="logo"
-                                width="40"
-                                height="40"
-                            />
+        <div className="admin-layout">
+            <aside className={`admin-sidebar ${open ? "" : "collapsed"}`}>
+                <div className="sidebar-brand">
+                    <div className="brand-left">
+                        <img
+                            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                            alt="logo"
+                            width={34}
+                            height={34}
+                            style={{ borderRadius: "50%" }}
+                        />
 
-                            {open && (
-                                <p className="text-light fw-bold m-0 fs-4">
-                                    Dashboard
-                                </p>
-                            )}
-                        </div>
+                        <span className="brand-text">
+                            User Dashboard
+                        </span>
                     </div>
-                    {/* icons */}
-                    <div className="row  mt-3">
 
-                        {
-                            data?.map((item, index) => {
-                                const Icon = item.icon
-                                return (
-                                    <>
-                                        <Link key={index} to={item.url} className="text-light mt-1  d-flex align-items-center gap-5" style={{ textDecoration: "none" }}>
-                                            <div>
-                                                <Icon className="text-light fs-4 " />
-                                                <span className="text-decoration-none ms-2 "> {open && <span className="UnLine fw-bold">{item.name}</span>}</span>
-                                            </div>
-                                        </Link>
-                                    </>
-                                )
-                            })
-                        }
-                    </div>
+                    <button
+                        className="hamburger-btn"
+                        onClick={handleHamburger}
+                        aria-label="Toggle Menu"
+                    >
+                        {open ? <IoClose /> : <RxHamburgerMenu />}
+                    </button>
                 </div>
-                <div className={`${open ? "col-sm-10" : "col-sm-11"}  navfix`}>
-                    <div className="row">
-                        <div className="bg-dark p-3 d-flex justify-content-between align-items-center text-white">
-                            <RxHamburgerMenu
-                                className="fs-4"
-                                style={{ cursor: "pointer" }}
-                                onClick={handleHamburger}
-                            />
 
-                            <h5 className="m-0">User Dashboard</h5>
+                <nav className="sidebar-nav">
+                    {data.map((item) => {
+                        const Icon = item.icon;
+                        const isActive =
+                            location.pathname === item.url;
 
-                            <RiLogoutCircleRLine
-                                className="fs-4"
-                                onClick={logout}
-                                style={{ cursor: "pointer" }}
-                            />
-                        </div>
-                        <hr />
-                        <div className="div">
-                            {children}
-                        </div>
+                        return (
+                            <Link
+                                key={item.url}
+                                to={item.url}
+                                className={`nav-item ${
+                                    isActive ? "active" : ""
+                                }`}
+                                title={!open ? item.name : undefined}
+                            >
+                                <span className="nav-icon-wrap">
+                                    <Icon className="nav-icon" />
+                                </span>
+
+                                <span className="nav-label">
+                                    {item.name}
+                                </span>
+                            </Link>
+                        );
+                    })}
+
+                    <button
+                        className="nav-item logout-item"
+                        onClick={logout}
+                        title={!open ? "Logout" : undefined}
+                    >
+                        <span className="nav-icon-wrap">
+                            <RiLogoutCircleRLine className="nav-icon" />
+                        </span>
+
+                        <span className="nav-label">
+                            Logout
+                        </span>
+                    </button>
+                </nav>
+            </aside>
+                        <div className="admin-main">
+                <header className="admin-topbar">
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: "100%",
+                        }}
+                    >
+                        <h5 className="m-0">
+                            User Dashboard
+                        </h5>
+
+                        <RiLogoutCircleRLine
+                            className="nav-icon"
+                            style={{
+                                fontSize: "1.5rem",
+                                color: "#ef4444",
+                                cursor: "pointer",
+                            }}
+                            onClick={logout}
+                            title="Logout"
+                        />
                     </div>
+                </header>
+
+                <div className="admin-content">
+                    {children}
                 </div>
             </div>
-        </>
-    )
-}
+        </div>
+    );
+};
 
-export default NavbarUserDashboard
-
-
+export default NavbarUserDashboard;

@@ -1,70 +1,117 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import {
+  FiMenu,
+  FiX,
+  FiBookOpen,
+  FiArrowRight,
+} from "react-icons/fi";
 import "../styles/Navbar.css";
 
 const navItems = [
-  { label: "Home", to: "/" },
-  { label: "About", to: "/about" },
-  { label: "Services", to: "/services" },
-  { label: "Register", to: "/register" },
-  { label: "Login", to: "/login" },
-  { label: "Admin", to: "/adminLogin" },
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Courses", path: "/services" },
+  { name: "Register", path: "/register" },
+  { name: "Login", path: "/login" },
+  { name: "Admin", path: "/adminLogin" },
 ];
 
 const Navbar: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 12);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <nav className={`custom-navbar ${isScrolled ? "navbar-scrolled" : ""}`}>
-      <div className="nav-wrap">
-        <Link className="brand-logo" to="/" onClick={() => setIsOpen(false)}>
-          <div className="logo-mark">L</div>
-          <span className="brand-name">LMS Portal</span>
-        </Link>
+    <>
+      <header className={`navbar ${scrolled ? "navbar-scroll" : ""}`}>
+        <div className="container nav-container">
 
-        <button
-          className={`custom-toggler ${isOpen ? "toggler-open" : ""}`}
-          type="button"
-          aria-label="Toggle navigation"
-          aria-expanded={isOpen}
-          onClick={() => setIsOpen((o) => !o)}
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+          {/* Logo */}
 
-        <div className={`nav-menu ${isOpen ? "nav-menu-open" : ""}`}>
-          <ul className="nav-links">
-            {navItems.map((item) => (
-              <li key={item.label}>
-                <NavLink
-                  end={item.to === "/"}
-                  to={item.to}
-                  onClick={() => setIsOpen(false)}
-                  className={({ isActive }) =>
-                    isActive ? "nav-link active-link" : "nav-link"
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          <Link
+            to="/"
+            className="logo"
+            onClick={closeMenu}
+          >
+            <div className="logo-box">
+              <FiBookOpen />
+            </div>
 
-          <Link to="/register" className="get-started-btn" onClick={() => setIsOpen(false)}>
-            Get Started
+            <div className="logo-content">
+              <h2>LMS Portal</h2>
+              <span>Learn • Build • Grow</span>
+            </div>
           </Link>
+
+          {/* Desktop Menu */}
+
+          <nav className={`nav-menu ${menuOpen ? "show" : ""}`}>
+
+            {navItems.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                end={item.path === "/"}
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-item active-nav"
+                    : "nav-item"
+                }
+              >
+                {item.name}
+              </NavLink>
+            ))}
+
+            <Link
+              to="/register"
+              className="mobile-btn"
+              onClick={closeMenu}
+            >
+              Get Started
+              <FiArrowRight />
+            </Link>
+
+          </nav>
+
+          {/* Right Side */}
+
+          <div className="nav-right">
+
+            <Link
+              to="/register"
+              className="desktop-btn"
+            >
+              Get Started
+              <FiArrowRight />
+            </Link>
+
+            <button
+              className="hamburger"
+              onClick={() =>
+                setMenuOpen(!menuOpen)
+              }
+            >
+              {menuOpen ? <FiX /> : <FiMenu />}
+            </button>
+
+          </div>
+
         </div>
-      </div>
-    </nav>
+      </header>
+    </>
   );
 };
 

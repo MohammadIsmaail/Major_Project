@@ -86,9 +86,9 @@ const DashboardUser = () => {
       {/* Welcome Section */}
       <div className="welcome-card mb-4">
         <div className="welcome-text">
-          <p className="greeting-eyebrow">{getGreeting()}</p>
+          <p className="greeting-eyebrow text-light">{getGreeting()}</p>
           <h2>{userName} 👋</h2>
-          <p className="welcome-sub">Here's what's happening with your account.</p>
+          <p className="welcome-sub text-light">Here's what's happening with your account.</p>
         </div>
       </div>
 
