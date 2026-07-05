@@ -11,7 +11,7 @@ interface User {
   id: number;
   name: string;
   email: string;
-  phone?: string;
+  mobile?: string;
   credit?: number;
   isActive?: boolean;
   created_at?: string;
@@ -116,7 +116,7 @@ const fetchUsers = async () => {
               <div className="user-details">
                 <div className="detail-box">
                   <strong>Phone</strong>
-                  <span>{u.phone || "—"}</span>
+                  <span>{u.mobile || "—"}</span>
                 </div>
                 <div className="detail-box">
                   <strong>Credits</strong>
