@@ -14,7 +14,8 @@ import CreateMasterPlanAdmin from "./components/adminDashboard/CreateMasterPlanA
 import MasterPlanAdmin from "./components/adminDashboard/MasterPlanAdmin"
 import CreateMasterCourseAdmin from "./components/adminDashboard/CreateMasterCourseAdmin"
 import MasterCourseAdmin from "./components/adminDashboard/MasterCourseAdmin"
-import { AuthGuardProtected, AuthGuardPublic } from "./hoc/AuthGuard/AuthGuard"
+import { AuthGuardProtected } from "./hoc/AuthGuard/AuthGuard"
+// import { AuthGuardProtected, AuthGuardPublic } from "./hoc/AuthGuard/AuthGuard"
 import Plan from "./components/userDashboard/Plan"
 import Purchase_Plan from "./components/userDashboard/Purchase_Plan"
 import View_Course from "./components/userDashboard/View_Course"
@@ -29,7 +30,8 @@ function App() {
         <Routes>
           
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<AuthGuardPublic><Register /></AuthGuardPublic>} />
+          {/* <Route path="/register" element={<AuthGuardPublic><Register /></AuthGuardPublic>} /> */}
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
 
