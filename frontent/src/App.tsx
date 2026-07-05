@@ -50,7 +50,7 @@ function App() {
           <Route path="/MasterPlanAdmin" element={<AuthGuardProtected><AdminDashboard><MasterPlanAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/CreateMasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
           <Route path="/MasterCourseAdmin" element={<AuthGuardProtected><AdminDashboard><MasterCourseAdmin /></AdminDashboard></AuthGuardProtected>} />
-          <Route path="/DashBoardAdminShow" element={<AuthGuardProtected><AdminDashboard><DashBoardAdminShow /></AdminDashboard></AuthGuardProtected>} />
+          <Route path="/DashBoardAdminShow" element={<DashBoardAdminShow />} />
 
           <Route path="/CreateMasterCourseAdmin/:id" element={<AuthGuardProtected><AdminDashboard><CreateMasterCourseAdmin /></AdminDashboard></AuthGuardProtected>}/>
        
