@@ -26,9 +26,6 @@ const DashBoardAdminShow = () => {
     const fetchStats = async () => {
       try {
         const res = await getDashboardStats();
-
-        console.log("Dashboard API Response =>", res);
-
         if (res?.success) {
           setStats(res.result);
         }
