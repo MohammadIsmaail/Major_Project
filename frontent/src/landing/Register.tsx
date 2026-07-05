@@ -174,7 +174,7 @@ const navigate = useNavigate()
                                         type="password"
                                         {...register("password")}
                                         className="form-control"
-                                        placeholder="Enter password"
+                                        placeholder="create your password"
                                     />
                                     {errors.password && (
                                         <small className="text-danger">
