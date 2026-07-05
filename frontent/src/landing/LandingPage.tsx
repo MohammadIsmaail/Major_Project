@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "../styles/LandingPage.css";
+
+const CODE_LINES = [
+  { text: "const developer = you;", color: "plain" },
+  { text: "developer.learn('MERN');", color: "call" },
+  { text: "developer.ship(project);", color: "call" },
+  { text: "// career.status = 'ready' ✓", color: "comment" },
+];
 
 const courses = [
   { name: "MERN Stack", tag: "Full Stack", weeks: 12 },
@@ -11,7 +18,57 @@ const courses = [
   { name: "Data Structures", tag: "Fundamentals", weeks: 10 },
 ];
 
+const features = [
+  {
+    title: "Expert courses",
+    desc: "Structured content from mentors who work in the industry.",
+  },
+  {
+    title: "Certification",
+    desc: "Earn a certificate the moment you finish a course.",
+  },
+  {
+    title: "Career support",
+    desc: "Resume reviews, mock interviews and placement help.",
+  },
+];
+
+const whyUs = [
+  { title: "Live projects", desc: "Ship work you can put in a portfolio, not just watch videos." },
+  { title: "Lifetime access", desc: "Come back to any course whenever you need a refresher." },
+  { title: "Placement assistance", desc: "Interview prep and referrals once you're job-ready." },
+  { title: "Responsive dashboard", desc: "Track progress on your phone, tablet, or laptop." },
+];
+
 const LandingPage: React.FC = () => {
+  const [lineIndex, setLineIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) {
+      setLineIndex(CODE_LINES.length);
+      return;
+    }
+
+    if (lineIndex >= CODE_LINES.length) return;
+
+    const current = CODE_LINES[lineIndex].text;
+
+    if (charIndex < current.length) {
+      const t = setTimeout(() => setCharIndex((c) => c + 1), 35);
+      return () => clearTimeout(t);
+    }
+
+    const t = setTimeout(() => {
+      setLineIndex((l) => l + 1);
+      setCharIndex(0);
+    }, 450);
+    return () => clearTimeout(t);
+  }, [charIndex, lineIndex]);
+
   return (
     <>
       <Navbar />
@@ -20,7 +77,7 @@ const LandingPage: React.FC = () => {
       <section className="hero">
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <span className="hero-tag">Cohort enrolling now</span>
+            <span className="eyebrow eyebrow-light">// enrolling now</span>
 
             <h1 className="hero-title">
               Learn skills that build your
@@ -33,8 +90,8 @@ const LandingPage: React.FC = () => {
             </p>
 
             <div className="hero-buttons">
-              <button className="btn btn-primary">Explore Courses</button>
-              <button className="btn btn-ghost">Watch Demo</button>
+              <button className="btn btn-primary">Explore courses</button>
+              <button className="btn btn-ghost">Watch demo</button>
             </div>
 
             <div className="hero-rating">
@@ -54,18 +111,33 @@ const LandingPage: React.FC = () => {
           </div>
 
           <div className="hero-visual">
-            <div className="class-card">
-              <div className="class-card-top">
-                <span className="live-dot" /> Live now
+            <div className="editor-window">
+              <div className="editor-titlebar">
+                <span className="dot dot-red" />
+                <span className="dot dot-yellow" />
+                <span className="dot dot-green" />
+                <span className="editor-filename">career.js</span>
               </div>
-              <h4>Building REST APIs with Node.js</h4>
-              <p>Mentor: Aditi Sharma</p>
-              <div className="class-card-progress">
-                <span style={{ width: "68%" }} />
+              <div className="editor-body">
+                {CODE_LINES.map((line, i) => {
+                  const isDone = i < lineIndex;
+                  const isTyping = i === lineIndex;
+                  const shown = isDone
+                    ? line.text
+                    : isTyping
+                    ? line.text.slice(0, charIndex)
+                    : "";
+                  if (!isDone && !isTyping) return null;
+                  return (
+                    <div className={`code-line code-${line.color}`} key={i}>
+                      <span className="line-no">{i + 1}</span>
+                      <span>{shown}</span>
+                      {isTyping && <span className="cursor" />}
+                    </div>
+                  );
+                })}
               </div>
-              <p className="class-card-meta">Lesson 8 of 12 · 42 watching</p>
             </div>
-            <div className="class-card class-card-behind" aria-hidden="true" />
           </div>
         </div>
       </section>
@@ -74,23 +146,18 @@ const LandingPage: React.FC = () => {
       <section className="section features">
         <div className="wrap">
           <div className="section-head">
-            <span className="eyebrow">Why LMS Portal</span>
+            <span className="eyebrow">// why lms portal</span>
             <h2>Built for people who learn by doing</h2>
           </div>
 
           <div className="grid-3">
-            <div className="feature-card">
-              <h3>Expert Courses</h3>
-              <p>Structured content from mentors who work in the industry.</p>
-            </div>
-            <div className="feature-card">
-              <h3>Certification</h3>
-              <p>Earn a certificate the moment you finish a course.</p>
-            </div>
-            <div className="feature-card">
-              <h3>Career Support</h3>
-              <p>Resume reviews, mock interviews and placement help.</p>
-            </div>
+            {features.map((f) => (
+              <div className="feature-card" key={f.title}>
+                <span className="feature-glyph">{"{ }"}</span>
+                <h3>{f.title}</h3>
+                <p>{f.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -99,7 +166,7 @@ const LandingPage: React.FC = () => {
       <section className="section courses">
         <div className="wrap">
           <div className="section-head">
-            <span className="eyebrow">Catalog</span>
+            <span className="eyebrow">// catalog</span>
             <h2>Popular courses</h2>
           </div>
 
@@ -108,7 +175,7 @@ const LandingPage: React.FC = () => {
               <div className="ticket-card" key={course.name}>
                 <div className="ticket-top">
                   <span className="ticket-tag">{course.tag}</span>
-                  <span className="ticket-weeks">{course.weeks} wks</span>
+                  <span className="ticket-weeks">{course.weeks}wks</span>
                 </div>
                 <h4>{course.name}</h4>
                 <p>From beginner to job-ready, with real projects.</p>
@@ -147,27 +214,27 @@ const LandingPage: React.FC = () => {
       {/* ================= WHY US ================= */}
       <section className="section why-us">
         <div className="wrap why-grid">
-          <ul className="why-list">
-            <li>
-              <strong>Live projects</strong>
-              <span>Ship work you can put in a portfolio, not just watch videos.</span>
-            </li>
-            <li>
-              <strong>Lifetime access</strong>
-              <span>Come back to any course whenever you need a refresher.</span>
-            </li>
-            <li>
-              <strong>Placement assistance</strong>
-              <span>Interview prep and referrals once you're job-ready.</span>
-            </li>
-            <li>
-              <strong>Responsive dashboard</strong>
-              <span>Track progress on your phone, tablet, or laptop.</span>
-            </li>
-          </ul>
+          <div className="terminal-list">
+            <div className="terminal-titlebar">
+              <span className="dot dot-red" />
+              <span className="dot dot-yellow" />
+              <span className="dot dot-green" />
+            </div>
+            <ul>
+              {whyUs.map((item) => (
+                <li key={item.title}>
+                  <span className="prompt">&gt;</span>
+                  <div>
+                    <strong>{item.title}</strong>
+                    <span>{item.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <div className="why-copy">
-            <span className="eyebrow">Why choose us</span>
+            <span className="eyebrow">// why choose us</span>
             <h2>A dashboard that keeps you moving</h2>
             <p>
               Every course tracks your progress automatically, so picking up
@@ -180,9 +247,10 @@ const LandingPage: React.FC = () => {
       {/* ================= CTA ================= */}
       <section className="cta">
         <div className="wrap cta-inner">
-          <h2>Ready to start learning?</h2>
+          <span className="eyebrow eyebrow-light">// ready?</span>
+          <h2>Start learning today</h2>
           <p>Join thousands of students already learning on LMS Portal.</p>
-          <button className="btn btn-accent">Get Started</button>
+          <button className="btn btn-accent">Get started</button>
         </div>
       </section>
 
