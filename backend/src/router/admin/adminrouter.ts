@@ -44,9 +44,9 @@ adminRouter.put("/update-master-plan/:id", updateMasterPlanData);
 
 
 // UserAdmin  Handler
-adminRouter.get("/get-all-users", verifyToken, adminGetAllUsers);
-adminRouter.delete("/delete-user/:id", verifyToken, adminDeleteUser);
-adminRouter.patch("/toggle-user-status/:id", verifyToken, adminToggleUserStatus);
+adminRouter.get("/get-all-users",  adminGetAllUsers);
+adminRouter.delete("/delete-user/:id", adminDeleteUser);
+adminRouter.patch("/toggle-user-status/:id",  adminToggleUserStatus);
 
 
 //  Master Course  masterCourseGetData
