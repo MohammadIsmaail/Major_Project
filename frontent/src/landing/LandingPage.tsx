@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import "../styles/LandingPage.css";
-import { FiUsers, FiBookOpen, FiAward, FiTrendingUp } from "react-icons/fi";
+import { FiUsers, FiBookOpen, FiAward, FiTrendingUp, FiArrowUpRight } from "react-icons/fi";
 
 const courses = [
   { name: "MERN Stack", tag: "Full Stack", weeks: 12 },
@@ -106,16 +106,26 @@ const LandingPage: React.FC = () => {
             <p className="kicker kicker-center">Catalog</p>
             <h2>Popular courses</h2>
           </div>
-          <div className="grid-3">
-            {courses.map((course) => (
-              <div className="course-card" key={course.name}>
-                <div className="course-card-top">
-                  <span className="course-tag">{course.tag}</span>
-                  <span className="course-weeks">{course.weeks} weeks</span>
+
+          <div className="course-list">
+            {courses.map((course, i) => (
+              <div className="course-row" key={course.name}>
+                <span className="course-index">{String(i + 1).padStart(2, "0")}</span>
+
+                <div className="course-row-body">
+                  <div className="course-row-top">
+                    <h4>{course.name}</h4>
+                    <span className="course-tag">{course.tag}</span>
+                  </div>
+                  <p>From beginner to job-ready, with real projects.</p>
                 </div>
-                <h4>{course.name}</h4>
-                <p>From beginner to job-ready, with real projects.</p>
-                <button className="btn btn-primary btn-block">Enroll now</button>
+
+                <div className="course-row-meta">
+                  <span className="course-weeks">{course.weeks} weeks</span>
+                  <button className="course-cta" aria-label={`Enroll in ${course.name}`}>
+                    <FiArrowUpRight />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -125,7 +135,7 @@ const LandingPage: React.FC = () => {
       {/* ================= STATS ================= */}
       <section className="stats">
         <div className="wrap">
-          <div className="stats-card">
+          <div className="stats-strip">
             {stats.map((s) => (
               <div className="stat-item" key={s.label}>
                 <span className="stat-icon">{s.icon}</span>
@@ -150,10 +160,11 @@ const LandingPage: React.FC = () => {
               where you left off never takes more than one click.
             </p>
           </div>
-          <ul className="why-list">
-            {whyUs.map((item) => (
+
+          <ul className="why-timeline">
+            {whyUs.map((item, i) => (
               <li key={item.title}>
-                <span className="why-index" />
+                <span className="why-num">{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <strong>{item.title}</strong>
                   <span>{item.desc}</span>
@@ -166,6 +177,7 @@ const LandingPage: React.FC = () => {
 
       {/* ================= CTA ================= */}
       <section className="cta">
+        <span className="cta-blob" aria-hidden="true" />
         <div className="wrap cta-inner">
           <h2>Ready to start learning?</h2>
           <p>Join thousands of students already learning on LMS Portal.</p>
