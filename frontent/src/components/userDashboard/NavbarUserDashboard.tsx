@@ -5,6 +5,7 @@ import { RiFileList3Line, RiLogoutCircleRLine } from "react-icons/ri";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
 import { MdWindow } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 import "../../styles/UserAdminNavUnLine.css";
 
 const NavbarUserDashboard = ({ children }: any) => {
@@ -30,9 +31,9 @@ const NavbarUserDashboard = ({ children }: any) => {
             name: "View Course",
         },
         {
-            url: "/View_Course",
-            icon: RiFileList3Line,
-            name: "View Course",
+            url: "/Update_Pass",
+            icon: FaEdit,
+            name: "Update Password",
         },
     ];
 

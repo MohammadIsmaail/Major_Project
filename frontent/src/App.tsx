@@ -21,6 +21,7 @@ import Purchase_Plan from "./components/userDashboard/Purchase_Plan"
 import View_Course from "./components/userDashboard/View_Course"
 import DashboardUser from "./components/userDashboard/DashboardUser"
 import ForgetPassword from "./pages/ForgatePassword/ForgetPassword"
+import Update_Pass from "./components/userDashboard/Update_Pass"
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/Purchase_Plan" element={<AuthGuardProtected><NavbarUserDashboard><Purchase_Plan /></NavbarUserDashboard></AuthGuardProtected>} />
           <Route path="/View_Course" element={<AuthGuardProtected><NavbarUserDashboard><View_Course /></NavbarUserDashboard></AuthGuardProtected>} />
           <Route path="/DashboardUser" element={<AuthGuardProtected><NavbarUserDashboard><DashboardUser /></NavbarUserDashboard></AuthGuardProtected>} />
+          <Route path="/Update_Pass" element={<AuthGuardProtected><NavbarUserDashboard><Update_Pass /></NavbarUserDashboard></AuthGuardProtected>} />
 
 
 

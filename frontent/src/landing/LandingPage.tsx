@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import "../styles/LandingPage.css";
+import { FiUsers, FiBookOpen, FiAward, FiTrendingUp } from "react-icons/fi";
 
 const courses = [
   { name: "MERN Stack", tag: "Full Stack", weeks: 12 },
@@ -12,21 +13,9 @@ const courses = [
 ];
 
 const features = [
-  {
-    title: "Expert courses",
-    desc: "Structured content from mentors who work in the industry.",
-    dot: "dot-sand",
-  },
-  {
-    title: "Certification",
-    desc: "Earn a certificate the moment you finish a course.",
-    dot: "dot-coral",
-  },
-  {
-    title: "Career support",
-    desc: "Resume reviews, mock interviews and placement help.",
-    dot: "dot-sage",
-  },
+  { title: "Expert courses", desc: "Structured content from mentors who work in the industry.", dot: "dot-sand" },
+  { title: "Certification", desc: "Earn a certificate the moment you finish a course.", dot: "dot-coral" },
+  { title: "Career support", desc: "Resume reviews, mock interviews and placement help.", dot: "dot-sage" },
 ];
 
 const whyUs = [
@@ -34,6 +23,13 @@ const whyUs = [
   { title: "Lifetime access", desc: "Come back to any course whenever you need a refresher." },
   { title: "Placement assistance", desc: "Interview prep and referrals once you're job-ready." },
   { title: "Responsive dashboard", desc: "Track progress on your phone, tablet, or laptop." },
+];
+
+const stats = [
+  { icon: <FiUsers />, value: "15K+", label: "Students" },
+  { icon: <FiBookOpen />, value: "350+", label: "Courses" },
+  { icon: <FiAward />, value: "120+", label: "Mentors" },
+  { icon: <FiTrendingUp />, value: "98%", label: "Success rate" },
 ];
 
 const LandingPage: React.FC = () => {
@@ -47,34 +43,21 @@ const LandingPage: React.FC = () => {
         <div className="wrap hero-grid">
           <div className="hero-copy">
             <p className="kicker">Cohort enrolling now</p>
-
             <h1 className="hero-title">
               Learn skills that build your <span>future career</span>
             </h1>
-
             <p className="hero-text">
               Practical courses, real-world projects, quizzes and
               certificates — taught by people who ship code for a living.
             </p>
-
             <div className="hero-buttons">
               <button className="btn btn-primary">Explore courses</button>
               <button className="btn btn-link">Watch demo →</button>
             </div>
-
             <div className="hero-rating">
-              <div>
-                <h3>15K+</h3>
-                <p>Students</p>
-              </div>
-              <div>
-                <h3>350+</h3>
-                <p>Courses</p>
-              </div>
-              <div>
-                <h3>98%</h3>
-                <p>Success rate</p>
-              </div>
+              <div><h3>15K+</h3><p>Students</p></div>
+              <div><h3>350+</h3><p>Courses</p></div>
+              <div><h3>98%</h3><p>Success rate</p></div>
             </div>
           </div>
 
@@ -104,7 +87,6 @@ const LandingPage: React.FC = () => {
             <p className="kicker kicker-center">Why LMS Portal</p>
             <h2>Built for people who learn by doing</h2>
           </div>
-
           <div className="grid-3">
             {features.map((f) => (
               <div className="feature-card" key={f.title}>
@@ -124,7 +106,6 @@ const LandingPage: React.FC = () => {
             <p className="kicker kicker-center">Catalog</p>
             <h2>Popular courses</h2>
           </div>
-
           <div className="grid-3">
             {courses.map((course) => (
               <div className="course-card" key={course.name}>
@@ -134,9 +115,7 @@ const LandingPage: React.FC = () => {
                 </div>
                 <h4>{course.name}</h4>
                 <p>From beginner to job-ready, with real projects.</p>
-                <button className="btn btn-primary btn-block">
-                  Enroll now
-                </button>
+                <button className="btn btn-primary btn-block">Enroll now</button>
               </div>
             ))}
           </div>
@@ -145,22 +124,17 @@ const LandingPage: React.FC = () => {
 
       {/* ================= STATS ================= */}
       <section className="stats">
-        <div className="wrap grid-4">
-          <div>
-            <h2>15K+</h2>
-            <p>Students</p>
-          </div>
-          <div>
-            <h2>350+</h2>
-            <p>Courses</p>
-          </div>
-          <div>
-            <h2>120+</h2>
-            <p>Mentors</p>
-          </div>
-          <div>
-            <h2>98%</h2>
-            <p>Success rate</p>
+        <div className="wrap">
+          <div className="stats-card">
+            {stats.map((s) => (
+              <div className="stat-item" key={s.label}>
+                <span className="stat-icon">{s.icon}</span>
+                <div>
+                  <h2>{s.value}</h2>
+                  <p>{s.label}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -176,7 +150,6 @@ const LandingPage: React.FC = () => {
               where you left off never takes more than one click.
             </p>
           </div>
-
           <ul className="why-list">
             {whyUs.map((item) => (
               <li key={item.title}>
@@ -205,12 +178,8 @@ const LandingPage: React.FC = () => {
         <div className="wrap grid-3 footer-grid">
           <div>
             <h3>LMS Portal</h3>
-            <p>
-              Modern online learning platform for students, professionals
-              and educators.
-            </p>
+            <p>Modern online learning platform for students, professionals and educators.</p>
           </div>
-
           <div>
             <h5>Quick links</h5>
             <ul>
@@ -220,14 +189,12 @@ const LandingPage: React.FC = () => {
               <li>Contact</li>
             </ul>
           </div>
-
           <div>
             <h5>Contact</h5>
             <p>support@lms.com</p>
             <p>+91 98765 43210</p>
           </div>
         </div>
-
         <hr />
         <p className="footer-bottom">© 2026 LMS Portal. All rights reserved.</p>
       </footer>
