@@ -29,6 +29,11 @@ const NavbarUserDashboard = ({ children }: any) => {
             icon: RiFileList3Line,
             name: "View Course",
         },
+        {
+            url: "/View_Course",
+            icon: RiFileList3Line,
+            name: "View Course",
+        },
     ];
 
     const [open, setOpen] = useState(true);
