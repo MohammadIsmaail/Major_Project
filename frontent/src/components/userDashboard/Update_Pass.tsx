@@ -6,12 +6,15 @@ import {
   FaCheckCircle,
   FaTimesCircle,
 } from "react-icons/fa";
+import { updatePasswordService } from "../../services/API";
 import "../../styles/Update_Pass.css";
 
 const Update_Pass = () => {
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [formData, setFormData] = useState({
     currentPassword: "",
@@ -24,6 +27,7 @@ const Update_Pass = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    if (errorMsg) setErrorMsg("");
   };
 
   const passwordStrength = useMemo(() => {
@@ -51,17 +55,40 @@ const Update_Pass = () => {
     formData.confirmPassword.length > 0 &&
     formData.newPassword === formData.confirmPassword;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!passwordMatched) {
-      alert("Passwords do not match.");
+      setErrorMsg("Passwords do not match.");
       return;
     }
 
-    console.log(formData);
+    if (formData.newPassword === formData.currentPassword) {
+      setErrorMsg("New password must be different from current password.");
+      return;
+    }
 
-    // TODO: Call Update Password API
+    try {
+      setLoading(true);
+      setErrorMsg("");
+
+      const res = await updatePasswordService(formData);
+
+      if (res?.success) {
+        alert(res?.message || "Password updated successfully");
+        setFormData({
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: "",
+        });
+      }
+    } catch (err: any) {
+      setErrorMsg(
+        err?.response?.data?.message || "Something went wrong. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -208,8 +235,10 @@ const Update_Pass = () => {
 
           </div>
 
-          <button className="update-btn" type="submit">
-            Update Password
+          {errorMsg && <div className="form-error">{errorMsg}</div>}
+
+          <button className="update-btn" type="submit" disabled={loading}>
+            {loading ? "Updating..." : "Update Password"}
           </button>
 
         </form>

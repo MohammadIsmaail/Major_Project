@@ -205,3 +205,69 @@ export const forgetPassword = async (req: any, res: any) => {
     );
   }
 };
+
+export const updatePassword = async (req: any, res: any) => {
+  try {
+    const { currentPassword, newPassword, confirmPassword } = req.body;
+    const userId = req.user.id; // verifyToken se decoded payload
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      return createResponse(res, false, 400, "All Fields Are Required!", [], true);
+    }
+
+    if (newPassword !== confirmPassword) {
+      return createResponse(
+        res,
+        false,
+        400,
+        "New Password And Confirm Password Do Not Match!",
+        [],
+        true,
+      );
+    }
+
+    if (newPassword === currentPassword) {
+      return createResponse(
+        res,
+        false,
+        400,
+        "New Password Must Be Different From Current Password!",
+        [],
+        true,
+      );
+    }
+
+    const isExist = await user.findOne({ where: { id: userId } });
+    if (!isExist) {
+      return createResponse(res, false, 404, "User Not Found!", [], true);
+    }
+
+    const isMatched = await bcrypt.compare(currentPassword, isExist.password);
+    if (!isMatched) {
+      return createResponse(
+        res,
+        false,
+        401,
+        "Current Password Is Incorrect!",
+        [],
+        true,
+      );
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await user.update({ id: userId }, { password: hashedPassword });
+
+    return createResponse(res, true, 200, "Password Updated Successfully!", [], false);
+  } catch (err: any) {
+    console.log(err);
+    return createResponse(
+      res,
+      false,
+      500,
+      `Internal Server Error! || ${err.message}`,
+      [],
+      true,
+    );
+  }
+};

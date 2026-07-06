@@ -168,3 +168,14 @@ export const toggleUserStatusService = async (id: any) => {
   });
   return res.data;
 };
+
+// Update Password
+export const updatePasswordService = async (data: any) => {
+  const token = localStorage.getItem("token");
+  const res = await axios.put(`${BASE_URL}/user/update-password`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return res?.data;
+};
