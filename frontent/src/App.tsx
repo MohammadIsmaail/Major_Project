@@ -36,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
 
+
           {/* UserDashboard */}
           <Route path="/NavbarUserDashboard" element={<AuthGuardProtected><NavbarUserDashboard /></AuthGuardProtected>} />
           <Route path="/Plan" element={<AuthGuardProtected><NavbarUserDashboard><Plan /></NavbarUserDashboard></AuthGuardProtected>} />
