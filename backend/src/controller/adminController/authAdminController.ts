@@ -132,7 +132,7 @@ export const adminToggleUserStatus = async (req: any, res: any) => {
   try {
     const { id } = req.params;
     const existingUser = await user.findOne({ where: { id } });
-    if (!existingUser) {
+    if (!existingUser) {       
       return createResponse(res, false, 404, "User not found", [], true);
     }
     const newStatus = existingUser.status === 1 ? 0 : 1;
@@ -140,5 +140,5 @@ export const adminToggleUserStatus = async (req: any, res: any) => {
     return createResponse(res, true, 200, "User status updated", { isActive: newStatus === 1 }, false);
   } catch (error: any) {
     return createResponse(res, false, 500, error.message || "Internal Server Error", [], true);
-  }
+}
 };
